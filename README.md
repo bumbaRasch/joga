@@ -69,8 +69,9 @@ Perfect for yoga enthusiasts, fitness professionals, and anyone looking to trans
 ## 🚀 Live Demo
 
 Experience Joga in action:
-- **Live Site**: [https://joga-demo.com](https://joga-demo.com)
+- **Live Site**: [https://bumbarasch.github.io/joga](https://bumbarasch.github.io/joga) (GitHub Pages)
 - **Development Preview**: Running on `localhost:4321`
+- **Deployment Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions
 
 ### Screenshots
 
@@ -100,7 +101,7 @@ Joga looks stunning on all devices:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/joga.git
+git clone https://github.com/bumbarasch/joga.git
 cd joga
 
 # Install dependencies
@@ -120,6 +121,25 @@ npm run preview
 
 **Development Server**: `npm run dev` starts at `localhost:4321` with hot reload
 **Build Output**: Static files generated in `./dist/` for optimal performance
+
+### 🚀 Quick Deploy to GitHub Pages
+
+This project is pre-configured for GitHub Pages deployment:
+
+1. **Push to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Deploy Joga platform"
+   git push origin main
+   ```
+
+2. **Enable GitHub Pages**:
+   - Go to repository **Settings** → **Pages**
+   - Set **Source** to **GitHub Actions**
+
+3. **Your site will be live at**: `https://bumbarasch.github.io/joga`
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ### Environment Setup
 
@@ -156,6 +176,9 @@ npm run preview
 
 ```
 joga/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions deployment workflow
 ├── src/
 │   ├── components/              # Reusable Astro components
 │   │   ├── Hero.astro          # Main hero section with navigation
@@ -190,7 +213,8 @@ joga/
 │   │   └── background.svg      # Background graphics
 │   └── middleware.ts            # Language detection & routing middleware
 ├── public/                      # Public static files
-├── astro.config.mjs            # Astro v5 configuration with i18n
+├── astro.config.mjs            # Astro v5 configuration with i18n and GitHub Pages
+├── DEPLOYMENT.md               # Detailed GitHub Pages deployment guide
 ├── package.json                # Dependencies and scripts
 ├── tsconfig.json               # TypeScript configuration (strict mode)
 └── README.md                   # This documentation
@@ -336,6 +360,40 @@ SITE_URL=https://your-domain.com
 
 ---
 
+## 🚀 Deployment
+
+### GitHub Pages (Recommended)
+
+This project is pre-configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+**Quick Deploy**:
+1. Push code to `main` branch
+2. Enable GitHub Pages in repository settings
+3. Set Source to "GitHub Actions"
+4. Site will be live at `https://bumbarasch.github.io/joga`
+
+**Features**:
+- ✅ Automatic deployment on code changes
+- ✅ Optimized static builds
+- ✅ Global CDN distribution
+- ✅ Custom domain support
+- ✅ HTTPS by default
+
+**Configuration Files**:
+- `.github/workflows/deploy.yml` - GitHub Actions workflow
+- `astro.config.mjs` - GitHub Pages configuration
+
+For detailed instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+### Alternative Deployment Options
+
+- **Netlify**: Drag and drop `./dist` folder
+- **Vercel**: Connect GitHub repository
+- **Cloudflare Pages**: Static site hosting
+- **AWS S3 + CloudFront**: Enterprise scaling
+
+---
+
 ## 📚 Development Reference
 
 ### Translation System Usage
@@ -439,6 +497,31 @@ npm list astro @types/node
 npm run build
 # Check src/assets/app.css DaisyUI plugin configuration
 ```
+
+### GitHub Pages Deployment Issues
+
+**Deployment workflow fails?**
+- Check Actions tab for detailed error logs
+- Ensure `package-lock.json` is committed (required by Astro action)
+- Verify `npm run build` works locally
+- Check that `main` branch is the deployment target
+
+**Site shows 404 after deployment?**
+- Verify GitHub Pages is enabled in repository settings
+- Check that Source is set to "GitHub Actions"
+- Ensure workflow completed successfully
+- Wait a few minutes for DNS propagation
+
+**Internal links broken on GitHub Pages?**
+- Verify `base` path in `astro.config.mjs` matches repository name
+- Check that internal navigation uses relative paths
+- Ensure language switching respects base path configuration
+
+**Build succeeds but site doesn't update?**
+- Check if deployment workflow is triggered on push
+- Verify workflow completed without errors
+- Clear browser cache and hard refresh
+- Check deployment history in Actions tab
 
 ### Development Debugging Tips
 
