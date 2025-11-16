@@ -150,3 +150,36 @@ const t = (key: string, values: Record<string, string> = {}) => {
 
 <!-- Video Modal -->
 <VideoModal />
+
+<script>
+  // Declare the function type on Window interface
+  declare global {
+    interface Window {
+      toggleMobileMenu: () => void;
+    }
+  }
+
+  // Mobile menu functionality - make globally available
+  window.toggleMobileMenu = function() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  };
+
+  // Video modal functionality is handled by the VideoModal component
+  // The playIntroVideo function is already defined globally by VideoModal
+
+  // Close mobile menu when clicking on links
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const menu = document.getElementById('mobile-menu');
+        if (menu) {
+          menu.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
