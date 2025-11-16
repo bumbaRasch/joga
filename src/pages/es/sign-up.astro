@@ -1,0 +1,235 @@
+---
+// Spanish sign up page with pricing and registration options
+import Layout from '../../layouts/Layout.astro';
+import { getTranslation } from '../../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}}`, value);
+  });
+  return translation;
+};
+---
+
+<Layout title={t('signup.title')} description={t('signup.description')}>
+  <section id="signup" class="min-h-screen py-20 px-4">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('signup.title')}
+          </span>
+        </h1>
+        <p class="text-xl text-base-content/80 max-w-3xl mx-auto">
+          {t('signup.description')}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <!-- Free Plan -->
+        <div class="card bg-base-100 shadow-xl border border-base-300">
+          <div class="card-body">
+            <h2 class="card-title text-2xl mb-2">{t('pricing.plans.free')}</h2>
+            <p class="text-base-content/70 mb-4">{t('pricing.descriptions.free')}</p>
+            <div class="text-4xl font-bold mb-6">
+              {t('pricing.prices.free')}
+              <span class="text-lg font-normal text-base-content/60">/{t('signup.month')}</span>
+            </div>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.basicClasses')}
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.progressTracking')}
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.community')}
+              </li>
+            </ul>
+            <div class="card-actions justify-end">
+              <button class="btn btn-outline btn-block" onclick="selectPlan('free')">
+                {t('pricing.buttons.getStartedFree')}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="card bg-primary text-primary-content shadow-xl scale-105">
+          <div class="card-body">
+            <h2 class="card-title text-2xl mb-2">{t('pricing.plans.pro')}</h2>
+            <p class="text-primary-content/80 mb-4">{t('pricing.descriptions.pro')}</p>
+            <div class="text-4xl font-bold mb-6">
+              {t('pricing.prices.proMonthly')}
+              <span class="text-lg font-normal text-primary-content/70">/{t('signup.month')}</span>
+            </div>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.everythingInFree')}
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.mobileAccess')}
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.liveClasses')}
+              </li>
+            </ul>
+            <div class="card-actions justify-end">
+              <button class="btn btn-secondary btn-block" onclick="startFreeTrial('pro')">
+                {t('pricing.buttons.startFreeTrial')}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="card bg-base-100 shadow-xl border border-base-300">
+          <div class="card-body">
+            <h2 class="card-title text-2xl mb-2">{t('pricing.plans.premium')}</h2>
+            <p class="text-base-content/70 mb-4">{t('pricing.descriptions.premium')}</p>
+            <div class="text-4xl font-bold mb-6">
+              {t('pricing.prices.premiumMonthly')}
+              <span class="text-lg font-normal text-base-content/60">/{t('signup.month')}</span>
+            </div>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.everythingInPro')}
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.aiRecommendations')}
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pricing.features.personalizedCoach')}
+              </li>
+            </ul>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary btn-block" onclick="startFreeTrial('premium')">
+                {t('pricing.buttons.startFreeTrial')}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign Up Form -->
+      <div id="signup-form" class="hidden max-w-md mx-auto">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title text-2xl mb-4">{t('signup.createAccount')}</h3>
+            <form onsubmit="handleSignup(event)">
+              <div class="form-control mb-4">
+                <label class="label"><span class="label-text">{t('signup.form.name')}</span></label>
+                <input type="text" placeholder={t('signup.form.namePlaceholder')} class="input input-bordered w-full" required />
+              </div>
+              <div class="form-control mb-4">
+                <label class="label"><span class="label-text">{t('signup.form.email')}</span></label>
+                <input type="email" placeholder={t('signup.form.emailPlaceholder')} class="input input-bordered w-full" required />
+              </div>
+              <div class="form-control mb-4">
+                <label class="label"><span class="label-text">{t('signup.form.password')}</span></label>
+                <input type="password" placeholder={t('signup.form.passwordPlaceholder')} class="input input-bordered w-full" required />
+              </div>
+              <div class="form-control mb-6">
+                <label class="label"><span class="label-text">{t('signup.form.plan')}</span></label>
+                <input type="text" id="selected-plan" class="input input-bordered w-full" readonly />
+              </div>
+              <div class="form-control mb-6">
+                <label class="cursor-pointer flex items-center gap-2">
+                  <input type="checkbox" class="checkbox" required />
+                  <span class="label-text">
+                    {t('signup.form.agreeToTerms', {
+                      terms: 'Términos de Servicio',
+                      privacy: 'Política de Privacidad'
+                    })}
+                  </span>
+                </label>
+              </div>
+              <div class="card-actions">
+                <button type="submit" class="btn btn-primary btn-block">{t('signup.form.createAccount')}</button>
+                <button type="button" class="btn btn-outline btn-block" onclick="backToPricing()">{t('signup.form.back')}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  declare global {
+    interface Window {
+      selectPlan: (plan: string) => void;
+      startFreeTrial: (plan: string) => void;
+      backToPricing: () => void;
+      handleSignup: (event: Event) => void;
+    }
+  }
+
+  window.selectPlan = function(plan: string) {
+    const pricingCards = document.querySelectorAll('#signup .card');
+    const signupForm = document.getElementById('signup-form');
+    const selectedPlanInput = document.getElementById('selected-plan') as HTMLInputElement;
+
+    selectedPlanInput.value = plan.charAt(0).toUpperCase() + plan.slice(1);
+
+    pricingCards.forEach(card => card.classList.add('hidden'));
+    signupForm?.classList.remove('hidden');
+    signupForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Start free trial - navigate to dashboard
+  window.startFreeTrial = function(plan: string) {
+    // Store selected plan for future use
+    localStorage.setItem('selectedPlan', plan);
+
+    // Navigate to dashboard
+    window.location.href = '/dashboard';
+  };
+
+  window.backToPricing = function() {
+    const pricingCards = document.querySelectorAll('#signup .card');
+    const signupForm = document.getElementById('signup-form');
+
+    pricingCards.forEach(card => card.classList.remove('hidden'));
+    signupForm?.classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.handleSignup = function(event: Event) {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    alert('¡Cuenta creada exitosamente! Bienvenido a Joga.');
+    form.reset();
+    window.backToPricing();
+  };
+</script>

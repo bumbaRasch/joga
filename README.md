@@ -11,10 +11,11 @@
   </p>
 
   <p>
-    <img src="https://img.shields.io/badge/Astro-FFC107?style=for-the-badge&logo=astro&logoColor=black" alt="Astro" />
-    <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/DaisyUI-FFD700?style=for-the-badge&logo=daisyui&logoColor=black" alt="DaisyUI" />
+    <img src="https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white" alt="Astro v5" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS v4" />
+    <img src="https://img.shields.io/badge/DaisyUI-5.5.5-FFD700?style=for-the-badge&logo=daisyui&logoColor=black" alt="DaisyUI" />
     <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License" />
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   </p>
 </div>
 
@@ -54,20 +55,23 @@ Perfect for yoga enthusiasts, fitness professionals, and anyone looking to trans
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: [Astro v5](https://astro.build/) - Modern static site generator
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) + [DaisyUI](https://daisyui.com/)
-- **Internationalization**: Built-in i18n support with automatic language detection
-- **Deployment**: Static hosting optimized for performance
-- **Icons**: SVG-based icon system for scalability
-- **Animations**: CSS animations and transitions for engaging UX
+- **Framework**: [Astro v5.15.8](https://astro.build/) - Modern static site generator with island architecture
+- **Styling**: [Tailwind CSS v4.1.17](https://tailwindcss.com/) + [DaisyUI v5.5.5](https://daisyui.com/) - Component library
+- **Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe development with strict mode
+- **Internationalization**: Built-in Astro i18n with 5-language support and automatic detection
+- **Build Tool**: Vite with TailwindCSS v4 plugin integration
+- **Deployment**: Static site generation optimized for global CDNs
+- **Icons**: Custom SVG assets and scalable icon system
+- **Animations**: CSS keyframes, glassmorphism effects, and smooth transitions
 
 ---
 
 ## 🚀 Live Demo
 
 Experience Joga in action:
-- **Live Site**: [https://joga-demo.com](https://joga-demo.com)
+- **Live Site**: [https://bumbarasch.github.io/joga](https://bumbarasch.github.io/joga) (GitHub Pages)
 - **Development Preview**: Running on `localhost:4321`
+- **Deployment Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions
 
 ### Screenshots
 
@@ -97,28 +101,52 @@ Joga looks stunning on all devices:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/joga.git
-cd yoga
+git clone https://github.com/bumbarasch/joga.git
+cd joga
 
 # Install dependencies
 npm install
 
 # Start development server
 npm run dev
+# Open http://localhost:4321
 
 # Build for production
 npm run build
+# Outputs to ./dist/
 
 # Preview production build
 npm run preview
 ```
+
+**Development Server**: `npm run dev` starts at `localhost:4321` with hot reload
+**Build Output**: Static files generated in `./dist/` for optimal performance
+
+### 🚀 Quick Deploy to GitHub Pages
+
+This project is pre-configured for GitHub Pages deployment:
+
+1. **Push to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Deploy Joga platform"
+   git push origin main
+   ```
+
+2. **Enable GitHub Pages**:
+   - Go to repository **Settings** → **Pages**
+   - Set **Source** to **GitHub Actions**
+
+3. **Your site will be live at**: `https://bumbarasch.github.io/joga`
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ### Environment Setup
 
 1. **Clone and Install**:
    ```bash
    git clone https://github.com/yourusername/joga.git
-   cd yoga
+   cd joga
    npm install
    ```
 
@@ -126,12 +154,20 @@ npm run preview
    ```bash
    npm run dev
    # Open http://localhost:4321
+   # Features hot reload, TypeScript compilation, and i18n debugging
    ```
 
 3. **Production Build**:
    ```bash
    npm run build
+   # Static site generation with optimized assets
    # Outputs to ./dist/
+   ```
+
+4. **Astro CLI Commands**:
+   ```bash
+   npm run astro add    # Add integrations
+   npm run astro check  # Type checking
    ```
 
 ---
@@ -140,27 +176,48 @@ npm run preview
 
 ```
 joga/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions deployment workflow
 ├── src/
-│   ├── components/          # Reusable Astro components
-│   │   ├── Hero.astro      # Landing hero section
-│   │   ├── Features.astro  # Features showcase
-│   │   ├── Classes.astro   # Live classes & schedule
-│   │   ├── Pricing.astro   # Pricing plans
-│   │   ├── Testimonials.astro # Social proof
-│   │   └── CTA.astro        # Call-to-action
-│   ├── layouts/             # Page layouts
-│   ├── lib/                 # Utilities & i18n
-│   │   └── i18n.ts          # Internationalization
-│   ├── pages/              # Route pages
-│   │   ├── index.astro     # English (default)
-│   │   ├── de/index.astro  # German
-│   │   ├── ru/index.astro  # Russian
-│   │   ├── tr/index.astro  # Turkish
-│   │   └── es/index.astro  # Spanish
-│   └── assets/             # Static assets
-├── public/                 # Static files
-├── astro.config.mjs       # Astro configuration
-└── package.json           # Project dependencies
+│   ├── components/              # Reusable Astro components
+│   │   ├── Hero.astro          # Main hero section with navigation
+│   │   ├── Features.astro      # AI-powered features showcase
+│   │   ├── Classes.astro       # Live classes & scheduling
+│   │   ├── Pricing.astro       # Pricing plans with toggle
+│   │   ├── Testimonials.astro  # User testimonials and social proof
+│   │   ├── CTA.astro           # Call-to-action sections
+│   │   ├── Welcome.astro       # Welcome/Onboarding component
+│   │   ├── VideoModal.astro    # Video playback modal
+│   │   ├── ThemeToggle.astro   # Dark/light mode switcher
+│   │   └── LanguageSwitcher.astro # Language selection dropdown
+│   ├── layouts/                 # Page layout templates
+│   │   └── Layout.astro        # Main layout with SEO & theme support
+│   ├── lib/                     # Utilities & core functionality
+│   │   └── i18n.ts             # Comprehensive i18n system with TypeScript
+│   ├── pages/                   # Route pages (file-based routing)
+│   │   ├── index.astro         # English (default locale)
+│   │   ├── de/index.astro      # German localized page
+│   │   ├── ru/index.astro      # Russian localized page
+│   │   ├── tr/index.astro      # Turkish localized page
+│   │   ├── es/index.astro      # Spanish localized page
+│   │   ├── sign-up.astro       # Sign-up pages (all locales)
+│   │   ├── dashboard.astro     # User dashboard (all locales)
+│   │   ├── careers.astro       # Careers page
+│   │   ├── press-kit.astro     # Press resources
+│   │   ├── terms-of-service.astro # Legal documentation
+│   │   └── privacy-policy.astro   # Privacy policy
+│   ├── assets/                  # Static assets & styles
+│   │   ├── app.css             # TailwindCSS v4 + DaisyUI configuration
+│   │   ├── astro.svg           # Custom SVG assets
+│   │   └── background.svg      # Background graphics
+│   └── middleware.ts            # Language detection & routing middleware
+├── public/                      # Public static files
+├── astro.config.mjs            # Astro v5 configuration with i18n and GitHub Pages
+├── DEPLOYMENT.md               # Detailed GitHub Pages deployment guide
+├── package.json                # Dependencies and scripts
+├── tsconfig.json               # TypeScript configuration (strict mode)
+└── README.md                   # This documentation
 ```
 
 ---
@@ -179,9 +236,28 @@ Joga supports seamless multilingual experiences:
 
 ### Adding New Languages
 
-1. Update `src/lib/i18n.ts` with new translations
-2. Add language to `astro.config.mjs`
-3. Create new page in `src/pages/{locale}/index.astro`
+1. **Update Translation Engine**: Add new language data to `src/lib/i18n.ts` translation interface and object
+2. **Configure Astro**: Add language code to `locales` array in `astro.config.mjs`
+3. **Create Localized Pages**: Add new page in `src/pages/{locale}/index.astro` following existing patterns
+4. **Update Language Switcher**: Add language info to `getLocaleInfo()` function
+5. **Test Implementation**: Verify routing and translation functionality
+
+### Translation System Architecture
+
+The project uses a comprehensive type-safe translation system:
+
+```typescript
+// Translation interface ensures type safety
+export interface Translation {
+  hero: { title: string; subtitle: string; /* ... */ };
+  nav: { home: string; features: string; /* ... */ };
+  // Complete coverage of all UI text
+};
+
+// Dynamic parameter replacement
+t('cta.termsAgree', { terms: 'Terms', privacy: 'Privacy' })
+// Results in: "I agree to the Terms and Privacy"
+```
 
 ---
 
@@ -206,23 +282,60 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ---
 
-## 📊 Performance
+## 📊 Performance & Optimization
 
-- ⚡ **Lightning Fast**: Built with Astro's static generation
-- 📱 **Mobile First**: Optimized for mobile performance
-- 🎯 **SEO Optimized**: Perfect for search engines
-- ♿ **Accessible**: WCAG 2.1 compliant
-- 🌐 **CDN Ready**: Optimized for global delivery
+### Core Features
+- ⚡ **Static Site Generation**: Astro v5 builds static files for optimal performance
+- 📱 **Mobile-First Design**: Progressive enhancement with responsive breakpoints
+- 🎯 **SEO Optimized**: Built-in hreflang, structured data, and meta tags
+- ♿ **WCAG 2.1 Compliant**: Semantic HTML and accessibility best practices
+- 🌐 **CDN Ready**: Optimized assets for global content delivery
 
-### Core Web Vitals
+### Performance Optimizations
+- **TailwindCSS v4**: Modern CSS engine with purging and optimization
+- **DaisyUI Themes**: Component-based styling with minimal CSS footprint
+- **Intersection Observer**: Efficient scroll-triggered animations
+- **CSS Containment**: Improved rendering performance
+- **RequestAnimationFrame**: Smooth theme transitions
+- **Reduced Motion**: Respects user accessibility preferences
+
+### Core Web Vitals (Targets)
 - **Lighthouse Score**: 95+ ✅
 - **Performance**: 95+ ✅
 - **Accessibility**: 100+ ✅
 - **Best Practices**: 95+ ✅
+- **SEO**: 100+ ✅
 
 ---
 
 ## 🔧 Configuration
+
+### Key Configuration Files
+
+#### `astro.config.mjs`
+```javascript
+export default defineConfig({
+    vite: {
+        plugins: [tailwindcss()], // TailwindCSS v4 integration
+    },
+    i18n: {
+        defaultLocale: "en",
+        locales: ["en", "de", "ru", "tr", "es"],
+        routing: { prefixDefaultLocale: false },
+    },
+    output: "static", // Optimal for performance
+    site: "https://joga.com",
+});
+```
+
+#### `src/assets/app.css`
+```css
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake;
+}
+/* Custom glassmorphism effects and theme variables */
+```
 
 ### Environment Variables
 
@@ -236,22 +349,59 @@ ANALYTICS_ID=your_analytics_id
 SITE_URL=https://your-domain.com
 ```
 
-### Customization
+### Customization Options
 
-Easily customize:
-- 🎨 **Colors**: Modify DaisyUI theme variables
-- 📝 **Content**: Update translations in `src/lib/i18n.ts`
-- 🎯 **Features**: Enable/disable components in layouts
-- 🔧 **SEO**: Update metadata in `astro.config.mjs`
+- 🎨 **Themes**: Modify DaisyUI themes and CSS variables in `app.css`
+- 📝 **Content**: Update translations in `src/lib/i18n.ts` with type safety
+- 🎯 **Components**: Enable/disable features in Layout.astro
+- 🔧 **SEO**: Update metadata and hreflang in astro.config.mjs
+- 🌍 **Languages**: Add new locales following the i18n pattern
+- 📱 **Responsive**: Adjust breakpoints using Tailwind utilities
 
 ---
 
-## 📚 API Reference
+## 🚀 Deployment
 
-### Translation System
+### GitHub Pages (Recommended)
+
+This project is pre-configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+**Quick Deploy**:
+1. Push code to `main` branch
+2. Enable GitHub Pages in repository settings
+3. Set Source to "GitHub Actions"
+4. Site will be live at `https://bumbarasch.github.io/joga`
+
+**Features**:
+- ✅ Automatic deployment on code changes
+- ✅ Optimized static builds
+- ✅ Global CDN distribution
+- ✅ Custom domain support
+- ✅ HTTPS by default
+
+**Configuration Files**:
+- `.github/workflows/deploy.yml` - GitHub Actions workflow
+- `astro.config.mjs` - GitHub Pages configuration
+
+For detailed instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+### Alternative Deployment Options
+
+- **Netlify**: Drag and drop `./dist` folder
+- **Vercel**: Connect GitHub repository
+- **Cloudflare Pages**: Static site hosting
+- **AWS S3 + CloudFront**: Enterprise scaling
+
+---
+
+## 📚 Development Reference
+
+### Translation System Usage
 
 ```typescript
-// Add new translations
+// Translation helper function in components
+import { getTranslation } from '../lib/i18n';
+
 const t = (key: string, values: Record<string, string> = {}) => {
   let translation = getTranslation(Astro, key);
   // Replace dynamic values
@@ -262,46 +412,167 @@ const t = (key: string, values: Record<string, string> = {}) => {
 };
 ```
 
-### Component Usage
+### Component Development Pattern
 
 ```astro
-// Using translations
-<h1>{t('hero.title')}</h1>
-<p>{t('hero.subtitle', { user: 'John' })}</p>
+---
+// src/components/Example.astro
+import { getTranslation } from '../lib/i18n';
+
+const t = (key: string, values = {}) => {
+  let translation = getTranslation(Astro, key);
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+  return translation;
+};
+---
+
+<section class="hero bg-base-200">
+  <h1 class="text-4xl font-bold">{t('hero.title')}</h1>
+  <p>{t('hero.subtitle', { user: 'John' })}</p>
+</section>
+```
+
+### Language Detection Flow
+
+1. **URL Path**: Check `/de/`, `/ru/`, etc. prefixes
+2. **Storage**: Check localStorage for `joga-lang` preference
+3. **Browser**: Parse `Accept-Language` header
+4. **Fallback**: Default to English
+
+### Theme System Implementation
+
+```javascript
+// Theme switching with smooth transitions
+const toggleTheme = () => {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  requestAnimationFrame(() => {
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+};
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## 🐛 Troubleshooting & Debugging
 
-### Common Issues
+### Common Issues & Solutions
 
 **Development server not starting?**
 ```bash
-# Clear node modules
+# Clear node modules and reinstall
 rm -rf node_modules package-lock.json
 npm install
 npm run dev
+# Check for port conflicts: lsof -i :4321
 ```
 
-**Build fails?**
+**Build fails with TypeScript errors?**
 ```bash
-# Check Astro version
-npm list astro
-# Update dependencies
-npm update
+# Check TypeScript configuration
+npm run astro check
+# Verify type safety in src/lib/i18n.ts
+npm list astro @types/node
 ```
 
 **Language switching not working?**
-- Check browser console for errors
-- Verify `src/middleware.ts` is correctly configured
+- Check browser console for i18n errors
+- Verify `src/middleware.ts` language detection logic
 - Ensure translation keys exist in `src/lib/i18n.ts`
+- Check `X-Detected-Locale` response header for debugging
+
+**Theme toggle not persistent?**
+- Verify localStorage is enabled in browser
+- Check `ThemeToggle.astro` event handlers
+- Ensure theme preference is saved correctly
+
+**Styling issues with DaisyUI?**
+```bash
+# Verify TailwindCSS v4 integration
+npm run build
+# Check src/assets/app.css DaisyUI plugin configuration
+```
+
+### GitHub Pages Deployment Issues
+
+**Deployment workflow fails?**
+- Check Actions tab for detailed error logs
+- Ensure `package-lock.json` is committed (required by Astro action)
+- Verify `npm run build` works locally
+- Check that `main` branch is the deployment target
+
+**Site shows 404 after deployment?**
+- Verify GitHub Pages is enabled in repository settings
+- Check that Source is set to "GitHub Actions"
+- Ensure workflow completed successfully
+- Wait a few minutes for DNS propagation
+
+**Internal links broken on GitHub Pages?**
+- Verify `base` path in `astro.config.mjs` matches repository name
+- Check that internal navigation uses relative paths
+- Ensure language switching respects base path configuration
+
+**Build succeeds but site doesn't update?**
+- Check if deployment workflow is triggered on push
+- Verify workflow completed without errors
+- Clear browser cache and hard refresh
+- Check deployment history in Actions tab
+
+### Development Debugging Tips
+
+1. **Language Detection**: Check `X-Detected-Locale` header in browser dev tools
+2. **Build Process**: Use `npm run build -- --verbose` for detailed output
+3. **Type Safety**: Run `npm run astro check` for TypeScript validation
+4. **Performance**: Use Lighthouse to verify Core Web Vitals targets
 
 ### Getting Help
 
-- 📖 **Documentation**: Check our [Wiki](https://github.com/yourusername/joga/wiki)
-- 🐛 **Issues**: [Report a bug](https://github.com/yourusername/joga/issues)
-- 💬 **Discussions**: [Join our community](https://github.com/yourusername/joga/discussions)
+- 📖 **Documentation**: Check [Astro Docs](https://docs.astro.build/)
+- 🐛 **Issues**: [Report bugs](https://github.com/yourusername/joga/issues)
+- 💬 **Community**: [Discussions](https://github.com/yourusername/joga/discussions)
+- 🎯 **Astro Discord**: [Join the community](https://astro.build/chat)
+
+---
+
+## 🙏 Acknowledgments
+
+### Technologies & Frameworks
+- [Astro v5](https://astro.build/) - Modern static site generator
+- [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework
+- [DaisyUI](https://daisyui.com/) - Component library for Tailwind CSS
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+
+### Inspiration
+- The global yoga and wellness community
+- Modern web development best practices
+- Open source contributors worldwide
+
+---
+
+## 📞 Contact & Community
+
+### Project Information
+- **Version**: 0.0.1
+- **Framework**: Astro v5.15.8
+- **License**: MIT
+- **Languages**: 5 (English, German, Russian, Turkish, Spanish)
+
+### Connect With Us
+- **Website**: [https://joga.com](https://joga.com)
+- **Documentation**: [GitHub Wiki](https://github.com/yourusername/joga/wiki)
+- **Issues**: [Report bugs](https://github.com/yourusername/joga/issues)
+- **Discussions**: [Community forum](https://github.com/yourusername/joga/discussions)
+- **Updates**: Follow releases on GitHub
+
+### Social Media
+- **X/Twitter**: [@joga_platform](https://twitter.com/joga_platform)
+- **LinkedIn**: [Joga Platform](https://linkedin.com/company/joga)
+- **YouTube**: [Joga Channel](https://youtube.com/@joga)
 
 ---
 
@@ -327,43 +598,13 @@ copies or substantial portions of the Software.
 
 ---
 
-## 🙏 Acknowledgments
-
-### Built With
-- [Astro](https://astro.build/) - The web framework for content-driven websites
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [DaisyUI](https://daisyui.com/) - Component library for Tailwind CSS
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-
-### Inspiration
-- The global yoga and wellness community
-- AI and machine learning innovators
-- Open source contributors worldwide
-
----
-
-## 📞 Contact
-
-### Project Maintainer
-- **Name**: Your Name
-- **Email**: your.email@example.com
-- **Website**: [https://yourwebsite.com](https://yourwebsite.com)
-- **LinkedIn**: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-
-### Social Media
-- **X/Twitter**: [@joga_platform](https://twitter.com/joga_platform)
-- **Instagram**: [@joga](https://instagram.com/joga)
-- **YouTube**: [Joga Channel](https://youtube.com/@joga)
-
----
-
 <div align="center">
   <p>
     <strong>🌟 If you like this project, please give it a star! 🌟</strong>
   </p>
 
   <p>
-    Made with ❤️ by the Joga Team
+    Made with ❤️ using modern web technologies
   </p>
 
   <p>

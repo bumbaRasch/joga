@@ -14,5 +14,7 @@ export default defineConfig({
         },
     },
     output: "static",
-    site: "https://joga.com",
+    // GitHub Pages configuration
+    site: "https://bumbarasch.github.io",
+    base: "/joga", // Replace "joga" with your repository name if different
 });
