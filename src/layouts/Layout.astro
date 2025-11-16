@@ -1,22 +1,302 @@
+---
+import "../assets/app.css";
+import { getTranslation, getTranslations } from '../lib/i18n';
+
+// Props for SEO meta tags
+export interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	url?: string;
+}
+
+const currentLocale = (Astro.currentLocale || 'en') as 'en' | 'de' | 'ru' | 'tr' | 'es';
+const { title, description, image, url } = Astro.props;
+
+// Localized default titles and descriptions
+const defaultTitles: Record<'en' | 'de' | 'ru' | 'tr' | 'es', string> = {
+  en: "Joga - AI-Powered Yoga & Wellness",
+  de: "Joga - KI-gestütztes Yoga & Wellness",
+  ru: "Йога - Йога на базе ИИ и Оздоровление",
+  tr: "Joga - Yapay Zeka Destekli Yoga & Wellness",
+  es: "Joga - Yoga con IA y Bienestar",
+};
+
+const defaultDescriptions: Record<'en' | 'de' | 'ru' | 'tr' | 'es', string> = {
+  en: "Transform your mind and body with personalized AI-driven yoga programs. Join thousands finding balance, strength, and inner peace.",
+  de: "Verwandeln Sie Körper und Geist mit personalisierten KI-gesteuerten Yoga-Programmen. Schließen Sie sich Tausenden an, die Balance, Stärke und inneren Frieden finden.",
+  ru: "Преобразуйте свой разум и тело с помощью персонализированных программ йоги на базе ИИ. Присоединяйтесь к тысячам, находящим баланс, силу и внутренний покой.",
+  tr: "Kişiselleştirilmiş yapay zeka destekli yoga programlarıyla zihin ve bedeninizi dönüştürün. Denge, güç ve iç huzur binlerce kişiye katılın.",
+  es: "Transforma tu mente y cuerpo con programas de yoga personalizados con IA. Únete a miles que encuentran equilibrio, fuerza y paz interior.",
+};
+
+const localizedTitle = title || defaultTitles[currentLocale] || defaultTitles.en;
+const localizedDescription = description || defaultDescriptions[currentLocale] || defaultDescriptions.en;
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+
+  // Replace dynamic values in translations
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+
+  return translation;
+};
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={currentLocale}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<!-- Alternate language links for SEO -->
+		<link rel="alternate" hreflang="en" href="https://joga.com/" />
+		<link rel="alternate" hreflang="de" href="https://joga.com/de/" />
+		<link rel="alternate" hreflang="ru" href="https://joga.com/ru/" />
+		<link rel="alternate" hreflang="tr" href="https://joga.com/tr/" />
+		<link rel="alternate" hreflang="es" href="https://joga.com/es/" />
+		<link rel="alternate" hreflang="x-default" href="https://joga.com/" />
+
+		<!-- Primary Meta Tags -->
+		<title>{localizedTitle}</title>
+		<meta name="title" content={localizedTitle} />
+		<meta name="description" content={localizedDescription} />
+		<meta name="keywords" content="yoga, meditation, wellness, fitness, AI yoga, online yoga, mindfulness, stress relief" />
+		<meta name="author" content="Joga Inc." />
+		<meta name="robots" content="index, follow" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:title" content={localizedTitle} />
+		<meta property="og:description" content={localizedDescription} />
+		<meta property="og:image" content={image} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Joga" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={url} />
+		<meta property="twitter:title" content={localizedTitle} />
+		<meta property="twitter:description" content={localizedDescription} />
+		<meta property="twitter:image" content={image} />
+
+		<!-- Additional Meta Tags for 2025-2026 Trends -->
+		<meta name="theme-color" content="#6366f1" />
+		<meta name="msapplication-TileColor" content="#6366f1" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+		<!-- Preconnect for performance -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			"name": "Joga",
+			"description": {localizedDescription},
+			"url": {url},
+			"applicationCategory": "HealthApplication",
+			"operatingSystem": "Web",
+			"offers": {
+				"@type": "Offer",
+				"price": "0",
+				"priceCurrency": "USD"
+			},
+			"aggregateRating": {
+				"@type": "AggregateRating",
+				"ratingValue": "4.9",
+				"reviewCount": "50000"
+			},
+			"inLanguage": {currentLocale}
+		}
+		</script>
 	</head>
-	<body>
+	<body class="min-h-screen bg-base-100 text-base-content">
 		<slot />
+
+		<!-- Locale data for client-side scripts -->
+		<script define:vars={{ currentLocale, translations: getTranslations(currentLocale) }}>
+			window.JOGA_LOCALE = currentLocale;
+			window.JOGA_TRANSLATIONS = translations;
+		</script>
 	</body>
 </html>
 
 <style>
-	html,
-	body {
+	:global(html, body) {
 		margin: 0;
+		padding: 0;
 		width: 100%;
 		height: 100%;
+		scroll-behavior: smooth;
+		/* Improve rendering performance */
+		overflow-x: hidden;
+	}
+
+	/* Fix hero section height */
+	:global(.hero) {
+		height: 100vh;
+		max-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Hero content container */
+	:global(.hero > .h-screen) {
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	:global(body) {
+		/* Optimize for animations */
+		transform: translateZ(0);
+		-webkit-transform: translateZ(0);
+	}
+
+	:global(body) {
+		font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Smooth animations for scroll elements */
+	:global(.scroll-animate) {
+		opacity: 0;
+		transform: translateY(15px);
+		transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+				transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		/* Prevent layout shift during animation */
+		backface-visibility: hidden;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	:global(.scroll-animate.visible) {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Stagger animations for cards */
+	:global(.card.scroll-animate) {
+		transition-delay: 0.1s;
+	}
+
+	:global(.card.scroll-animate:nth-child(2)) {
+		transition-delay: 0.15s;
+	}
+
+	:global(.card.scroll-animate:nth-child(3)) {
+		transition-delay: 0.2s;
+	}
+
+	:global(.card.scroll-animate:nth-child(4)) {
+		transition-delay: 0.25s;
+	}
+
+	:global(.card.scroll-animate:nth-child(5)) {
+		transition-delay: 0.3s;
+	}
+
+	:global(.card.scroll-animate:nth-child(6)) {
+		transition-delay: 0.35s;
+	}
+
+	/* Optimized theme switching - only transition specific elements */
+	:global(.theme-transition) {
+		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
+
+	:global(body.theme-transition) {
+		transition: background-color 0.2s ease;
+	}
+
+	:global(.card.theme-transition) {
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	:global(.navbar.theme-transition) {
+		transition: background-color 0.2s ease;
+	}
+
+	/* Performance optimizations */
+	:global(img) {
+		loading: lazy;
+	}
+
+	/* Custom scrollbar */
+	:global(::-webkit-scrollbar) {
+		width: 8px;
+	}
+
+	:global(::-webkit-scrollbar-track) {
+		background: hsl(var(--b2));
+	}
+
+	:global(::-webkit-scrollbar-thumb) {
+		background: hsl(var(--p));
+		border-radius: 4px;
+	}
+
+	:global(::-webkit-scrollbar-thumb:hover) {
+		background: hsl(var(--pf));
+	}
+
+	/* Focus states for accessibility */
+	:global(button:focus-visible),
+	:global(a:focus-visible),
+	:global(input:focus-visible),
+	:global(select:focus-visible),
+	:global(textarea:focus-visible) {
+		outline: 2px solid hsl(var(--p));
+		outline-offset: 2px;
+	}
+
+	/* Loading states */
+	:global(.skeleton) {
+		background: linear-gradient(90deg, hsl(var(--b2)) 25%, hsl(var(--b3)) 50%, hsl(var(--b2)) 75%);
+		background-size: 200% 100%;
+		animation: loading 1.5s infinite;
+	}
+
+	@keyframes loading {
+		0% { background-position: 200% 0; }
+		100% { background-position: -200% 0; }
+	}
+
+	/* Social media links styling */
+	:global(footer a svg) {
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+	}
+
+	:global(footer a:hover svg) {
+		filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+		transform: translateY(-2px);
+	}
+
+	/* Dark mode social media adjustments */
+	[data-theme="dark"] :global(footer a svg) {
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+	}
+
+	[data-theme="dark"] :global(footer a:hover svg) {
+		filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
 	}
 </style>

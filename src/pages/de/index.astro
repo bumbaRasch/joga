@@ -1,0 +1,36 @@
+---
+// Modern Joga Landing Page - German Version
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import Classes from '../../components/Classes.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import Pricing from '../../components/Pricing.astro';
+import CTA from '../../components/CTA.astro';
+
+// SEO Meta Tags for German
+const title = "Joga - Verwandle Deinen Körper & Geist mit KI-gestütztem Yoga";
+const description = "Erlebe die Zukunft des Wellness mit personalisierten KI-gesteuerten Yoga-Programmen. Schließe dich Tausenden an, die Balance, Stärke und inneren Frieden finden.";
+const image = "/og-image.jpg";
+const url = "https://joga.com/de/";
+---
+
+<Layout title={title} description={description} image={image} url={url}>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Features Section -->
+  <Features />
+
+  <!-- Classes Section -->
+  <Classes />
+
+  <!-- Testimonials Section -->
+  <Testimonials />
+
+  <!-- Pricing Section -->
+  <Pricing />
+
+  <!-- CTA Section -->
+  <CTA />
+</Layout>

@@ -1,0 +1,424 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getTranslation } from '../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+
+  // Replace dynamic values in translations
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}}`, value);
+  });
+
+  return translation;
+};
+---
+
+<Layout title={t('pressKit.title')} description={t('pressKit.description')}>
+  <!-- Hero Section -->
+  <section class="py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="badge badge-outline badge-lg mb-6">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1h6v4H7V6zm0 6h6v2H7v-2z" clip-rule="evenodd"></path>
+            </svg>
+            {t('pressKit.mediaResources')}
+          </span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('pressKit.title')}
+          </span>
+        </h1>
+        <p class="text-xl text-base-content/70 leading-relaxed mb-8">
+          {t('pressKit.subtitle')}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#brand-assets" class="btn btn-primary btn-lg">
+            {t('pressKit.downloadAssets')}
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-outline btn-lg">
+            {t('pressKit.contactUs')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Overview -->
+  <section id="overview" class="py-20 lg:py-32 bg-base-100 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t('pressKit.companyOverview')}
+            </span>
+          </h2>
+          <p class="text-lg text-base-content/70 leading-relaxed">
+            {t('pressKit.companyOverviewDesc')}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary mb-2">50K+</div>
+            <div class="text-base-content/70">{t('pressKit.stats.users')}</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-secondary mb-2">4.8★</div>
+            <div class="text-base-content/70">{t('pressKit.stats.rating')}</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-accent mb-2">100+</div>
+            <div class="text-base-content/70">{t('pressKit.stats.classes')}</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-success mb-2">25+</div>
+            <div class="text-base-content/70">{t('pressKit.stats.instructors')}</div>
+          </div>
+        </div>
+
+        <div class="card bg-base-200/50 shadow-xl">
+          <div class="card-body p-8 lg:p-12">
+            <h3 class="text-2xl font-bold mb-6">{t('pressKit.story.title')}</h3>
+            <p class="text-base-content/70 leading-relaxed mb-6">
+              {t('pressKit.story.content')}
+            </p>
+            <blockquote class="border-l-4 border-primary pl-6 italic text-base-content/80">
+              {t('pressKit.story.mission')}
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Assets -->
+  <section id="brand-assets" class="py-20 lg:py-32 bg-base-200/30 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t('pressKit.brandAssets')}
+            </span>
+          </h2>
+          <p class="text-lg text-base-content/70 leading-relaxed">
+            {t('pressKit.brandAssetsDesc')}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Logo Section -->
+          <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div class="card-body p-8">
+              <div class="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-4">
+                <span class="text-white text-3xl font-bold">J</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2">{t('pressKit.assets.logo')}</h3>
+              <p class="text-base-content/70 mb-4">{t('pressKit.assets.logoDesc')}</p>
+              <div class="space-y-2">
+                <button class="btn btn-outline btn-sm w-full">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3"></path>
+                  </svg>
+                  PNG (2K)
+                </button>
+                <button class="btn btn-outline btn-sm w-full">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3"></path>
+                  </svg>
+                  SVG
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colors Section -->
+          <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div class="card-body p-8">
+              <div class="flex gap-2 mb-4">
+                <div class="w-10 h-10 bg-primary rounded-lg"></div>
+                <div class="w-10 h-10 bg-secondary rounded-lg"></div>
+                <div class="w-10 h-10 bg-accent rounded-lg"></div>
+              </div>
+              <h3 class="text-xl font-bold mb-2">{t('pressKit.assets.colors')}</h3>
+              <p class="text-base-content/70 mb-4">{t('pressKit.assets.colorsDesc')}</p>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span>{t('pressKit.assets.primary')}</span>
+                  <span class="font-mono">#3B82F6</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>{t('pressKit.assets.secondary')}</span>
+                  <span class="font-mono">#8B5CF6</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>{t('pressKit.assets.accent')}</span>
+                  <span class="font-mono">#10B981</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screenshots Section -->
+          <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div class="card-body p-8">
+              <div class="w-16 h-16 bg-base-200 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-base-content/50" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold mb-2">{t('pressKit.assets.screenshots')}</h3>
+              <p class="text-base-content/70 mb-4">{t('pressKit.assets.screenshotsDesc')}</p>
+              <button class="btn btn-outline btn-sm w-full">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                {t('pressKit.assets.downloadAll')}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads Section -->
+  <section class="py-20 lg:py-32 bg-base-100 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t('pressKit.mediaDownloads')}
+            </span>
+          </h2>
+          <p class="text-lg text-base-content/70 leading-relaxed">
+            {t('pressKit.mediaDownloadsDesc')}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card bg-base-200/50 shadow-xl">
+            <div class="card-body p-8">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1h6v4H7V6zm0 6h6v2H7v-2z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold">{t('pressKit.downloads.pressRelease')}</h3>
+                  <p class="text-sm text-base-content/60">{t('pressKit.downloads.latestNews')}</p>
+                </div>
+              </div>
+              <button class="btn btn-primary w-full">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                {t('pressKit.downloads.download')} PDF
+              </button>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 shadow-xl">
+            <div class="card-body p-8">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold">{t('pressKit.downloads.executiveBio')}</h3>
+                  <p class="text-sm text-base-content/60">{t('pressKit.downloads.teamPhotos')}</p>
+                </div>
+              </div>
+              <button class="btn btn-secondary w-full">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                {t('pressKit.downloads.download')} ZIP
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Information -->
+  <section id="contact" class="py-20 lg:py-32 bg-base-200/30 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t('pressKit.contactInfo')}
+            </span>
+          </h2>
+          <p class="text-lg text-base-content/70 leading-relaxed">
+            {t('pressKit.contactInfoDesc')}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body p-8">
+              <h3 class="text-xl font-bold mb-4">{t('pressKit.contact.media')}</h3>
+              <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  <span>media@joga.com</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                  <span>+1 (555) 123-4567</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body p-8">
+              <h3 class="text-xl font-bold mb-4">{t('pressKit.contact.partnerships')}</h3>
+              <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  <span>partners@joga.com</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span>San Francisco, CA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-base-content/70 mb-6">
+            {t('pressKit.forImmediateRelease')}
+          </p>
+          <div class="badge badge-outline badge-lg">
+            {t('pressKit.available247')}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guidelines -->
+  <section class="py-20 lg:py-32 bg-base-100 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {t('pressKit.guidelines.title')}
+            </span>
+          </h2>
+          <p class="text-lg text-base-content/70 leading-relaxed">
+            {t('pressKit.guidelines.subtitle')}
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="card bg-base-200/50 shadow-xl">
+            <div class="card-body p-8">
+              <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                {t('pressKit.guidelines.logoUsage.title')}
+              </h3>
+              <p class="text-base-content/70 mb-4">
+                {t('pressKit.guidelines.logoUsage.content')}
+              </p>
+              <ul class="list-disc list-inside text-base-content/70 space-y-1">
+                <li>{t('pressKit.guidelines.logoUsage.rule1')}</li>
+                <li>{t('pressKit.guidelines.logoUsage.rule2')}</li>
+                <li>{t('pressKit.guidelines.logoUsage.rule3')}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 shadow-xl">
+            <div class="card-body p-8">
+              <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                </svg>
+                {t('pressKit.guidelines.attributions.title')}
+              </h3>
+              <p class="text-base-content/70">
+                {t('pressKit.guidelines.attributions.content')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 theme-transition">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6">
+          <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {t('pressKit.readyToShare')}
+          </span>
+        </h2>
+        <p class="text-lg text-base-content/70 leading-relaxed mb-8">
+          {t('pressKit.readyToShareDesc')}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#brand-assets" class="btn btn-primary btn-lg">
+            {t('pressKit.downloadAssets')}
+          </a>
+          <a href="#contact" class="btn btn-outline btn-lg">
+            {t('pressKit.contactUs')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (this: HTMLAnchorElement, e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      if (!href) return;
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>

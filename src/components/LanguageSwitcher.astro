@@ -1,0 +1,103 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLocaleInfo, getSupportedLocales } from '../lib/i18n';
+
+const currentLocale = Astro.currentLocale || 'en';
+const supportedLocales = getSupportedLocales();
+
+const languageOptions = supportedLocales.map(locale => {
+  const info = getLocaleInfo(locale);
+  return {
+    code: locale,
+    name: info.name,
+    flag: info.flag,
+    url: locale === 'en' ? '/' : `/${locale}/`,
+  };
+});
+---
+
+<div class="dropdown dropdown-end">
+  <div tabindex="0" role="button" class="btn btn-ghost btn-sm" aria-label="Select language">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+    </svg>
+    <span class="ml-1 uppercase font-medium">{currentLocale}</span>
+  </div>
+  <ul tabindex="0" class="dropdown-content z-[50] menu p-2 shadow-lg bg-base-100 rounded-box w-32">
+    {languageOptions.map((lang) => (
+      <li>
+        <a
+          href={lang.url}
+          class={`justify-center uppercase font-medium ${currentLocale === lang.code ? 'active' : ''}`}
+          aria-label={`Switch to ${lang.name}`}
+          onclick={`event.preventDefault(); switchLanguage('${lang.code}', '${lang.url}')`}
+        >
+          {lang.code}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .dropdown-content {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .dropdown li a {
+    transition: all 0.2s ease;
+  }
+
+  .dropdown li a:hover {
+    transform: translateX(4px);
+  }
+
+  .dropdown li a.active {
+    background: hsl(var(--p));
+    color: hsl(var(--pc));
+  }
+
+  /* Language flag animation */
+  .btn-circle:hover svg {
+    transform: scale(1.1);
+  }
+
+  .btn-circle svg {
+    transition: transform 0.2s ease;
+  }
+</style>
+
+<script>
+  // Declare the function type on Window interface
+  declare global {
+    interface Window {
+      switchLanguage: (locale: string, url: string) => void;
+    }
+  }
+
+  // Function to switch language with persistence
+  function switchLanguage(locale: string, url: string) {
+    // Save language preference in localStorage
+    localStorage.setItem('joga-lang', locale);
+
+    // Also set a cookie for server-side detection
+    document.cookie = 'joga-lang=' + locale + '; path=/; max-age=31536000; SameSite=Lax';
+
+    // Redirect to new language URL
+    window.location.href = url;
+  }
+
+  // Make function globally available
+  window.switchLanguage = switchLanguage;
+
+  // Apply saved language preference on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('joga-lang');
+    if (savedLang && savedLang !== '{currentLocale}') {
+      // If user has a saved preference that's different from current,
+      // show a subtle notification or switch automatically
+      console.log('Language preference saved: ' + savedLang + ', current: {currentLocale}');
+    }
+  });
+</script>

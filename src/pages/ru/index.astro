@@ -1,0 +1,36 @@
+---
+// Modern Joga Landing Page - Russian Version
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import Classes from '../../components/Classes.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import Pricing from '../../components/Pricing.astro';
+import CTA from '../../components/CTA.astro';
+
+// SEO Meta Tags for Russian
+const title = "Йога - Преобразуйте Свои Разум и Тело с Йогой на базе ИИ";
+const description = "Испытайте будущее оздоровления с помощью персонализированных программ йоги на базе ИИ. Присоединяйтесь к тысячам, находящим баланс, силу и внутренний покой.";
+const image = "/og-image.jpg";
+const url = "https://joga.com/ru/";
+---
+
+<Layout title={title} description={description} image={image} url={url}>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Features Section -->
+  <Features />
+
+  <!-- Classes Section -->
+  <Classes />
+
+  <!-- Testimonials Section -->
+  <Testimonials />
+
+  <!-- Pricing Section -->
+  <Pricing />
+
+  <!-- CTA Section -->
+  <CTA />
+</Layout>

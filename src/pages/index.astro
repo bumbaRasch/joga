@@ -1,11 +1,257 @@
 ---
-import Welcome from '../components/Welcome.astro';
+// Modern Joga Landing Page - Mobile First Design
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import Classes from '../components/Classes.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Pricing from '../components/Pricing.astro';
+import CTA from '../components/CTA.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// SEO Meta Tags
+const title = "Joga - Transform Your Mind & Body with AI-Powered Yoga";
+const description = "Experience the future of wellness with personalized AI-driven yoga programs. Join thousands finding balance, strength, and inner peace with Joga.";
+const image = "/og-image.jpg";
+const url = "https://joga.com";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title} description={description} image={image} url={url}>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Features Section -->
+  <Features />
+
+  <!-- Classes Section -->
+  <Classes />
+
+  <!-- Testimonials Section -->
+  <Testimonials />
+
+  <!-- Pricing Section -->
+  <Pricing />
+
+  <!-- CTA Section -->
+  <CTA />
 </Layout>
+
+<!-- Global Scripts -->
+<script>
+  // Initialize theme on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.classList.add('dark');
+    }
+
+    // Listen for system theme changes
+    if (window.matchMedia) {
+      const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      darkModeQuery.addListener((e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.classList.remove('dark');
+          }
+        }
+      });
+    }
+
+    // Optimized theme toggle functionality
+    const themeToggleBtn = document.querySelector('[onclick="toggleTheme()"]');
+    if (themeToggleBtn) {
+      themeToggleBtn.removeAttribute('onclick');
+      themeToggleBtn.addEventListener('click', function() {
+        // Use requestAnimationFrame for smoother transitions
+        requestAnimationFrame(() => {
+          const html = document.documentElement;
+          const currentTheme = html.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+          // Batch DOM updates for better performance
+          html.setAttribute('data-theme', newTheme);
+
+          // Use classList.toggle for better performance
+          html.classList.toggle('dark', newTheme === 'dark');
+
+          // Add transition class to body for smooth background change
+          document.body.classList.add('theme-transition');
+
+          // Store preference
+          localStorage.setItem('theme', newTheme);
+
+          // Remove transition class after animation completes
+          setTimeout(() => {
+            document.body.classList.remove('theme-transition');
+          }, 200);
+        });
+      });
+    }
+
+    // Mobile menu toggle functionality
+    const mobileMenuBtn = document.querySelector('[onclick="toggleMobileMenu()"]');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.removeAttribute('onclick');
+      mobileMenuBtn.addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu) {
+          menu.classList.toggle('hidden');
+        }
+      });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add smooth scroll animations with better performance
+    const animatedElements = document.querySelectorAll('section[id]:not(:first-of-type), .card');
+
+    // Set initial state with requestAnimationFrame for smoothness
+    requestAnimationFrame(() => {
+      animatedElements.forEach(el => {
+        el.classList.add('scroll-animate');
+        el.style.willChange = 'opacity, transform';
+      });
+
+      const observerOptions = {
+        threshold: 0.05,
+        rootMargin: '0px 0px -10% 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+              // Remove will-change after animation
+              setTimeout(() => {
+                entry.target.style.willChange = 'auto';
+              }, 600);
+            }, 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      animatedElements.forEach(el => {
+        observer.observe(el);
+      });
+    });
+
+    // Filter classes functionality
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const level = this.textContent.toLowerCase().includes('all') ? 'all' :
+                    this.textContent.toLowerCase().includes('beginner') ? 'beginner' :
+                    this.textContent.toLowerCase().includes('intermediate') ? 'intermediate' :
+                    this.textContent.toLowerCase().includes('advanced') ? 'advanced' :
+                    this.textContent.toLowerCase().includes('meditation') ? 'meditation' : 'all';
+
+        // Update active button
+        tabButtons.forEach(b => {
+          b.classList.remove('btn-primary');
+          b.classList.add('btn-outline');
+        });
+        this.classList.remove('btn-outline');
+        this.classList.add('btn-primary');
+
+        // Filter cards
+        const allCards = document.querySelectorAll('.class-card');
+        allCards.forEach(card => {
+          if (level === 'all' || card.dataset.level === level) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Pricing toggle functionality
+    const monthlyBtn = document.getElementById('monthly-btn');
+    const annualBtn = document.getElementById('annual-btn');
+
+    if (monthlyBtn && annualBtn) {
+      monthlyBtn.addEventListener('click', function() {
+        toggleBilling('monthly');
+      });
+
+      annualBtn.addEventListener('click', function() {
+        toggleBilling('annual');
+      });
+    }
+
+    function toggleBilling(type) {
+      const monthlyPrices = document.querySelectorAll('.monthly-price');
+      const annualPrices = document.querySelectorAll('.annual-price');
+
+      if (type === 'monthly') {
+        monthlyBtn.classList.add('btn-primary');
+        monthlyBtn.classList.remove('btn-outline');
+        annualBtn.classList.remove('btn-primary');
+        annualBtn.classList.add('btn-outline');
+
+        monthlyPrices.forEach(el => el.classList.remove('hidden'));
+        annualPrices.forEach(el => el.classList.add('hidden'));
+      } else {
+        annualBtn.classList.add('btn-primary');
+        annualBtn.classList.remove('btn-outline');
+        monthlyBtn.classList.remove('btn-primary');
+        monthlyBtn.classList.add('btn-outline');
+
+        monthlyPrices.forEach(el => el.classList.add('hidden'));
+        annualPrices.forEach(el => el.classList.remove('hidden'));
+      }
+    }
+
+    // CTA button functionality
+    const downloadAppBtn = document.getElementById('download-app-btn');
+    const browseClassesBtn = document.getElementById('browse-classes-btn');
+
+    if (downloadAppBtn) {
+      downloadAppBtn.addEventListener('click', function() {
+        alert('App download links will be available soon!');
+      });
+    }
+
+    if (browseClassesBtn) {
+      browseClassesBtn.addEventListener('click', function() {
+        const classesSection = document.getElementById('classes');
+        if (classesSection) {
+          classesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Form submission handling
+    const ctaForm = document.getElementById('cta-form');
+    if (ctaForm) {
+      ctaForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Welcome to Joga! Check your email for next steps to start your free trial.');
+        this.reset();
+      });
+    }
+
+    // Initialize with monthly selected for pricing
+    if (monthlyBtn) {
+      toggleBilling('monthly');
+    }
+  });
+</script>

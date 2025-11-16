@@ -1,0 +1,356 @@
+---
+// Classes Section with schedule and booking functionality
+import { getTranslation } from '../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+
+  // Replace dynamic values in translations
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+
+  return translation;
+};
+---
+
+<section id="classes" class="py-20 lg:py-32 bg-base-100 theme-transition">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="badge badge-outline badge-lg mb-4">
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+          </svg>
+          {t('classes.liveClasses')}
+        </span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">
+        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          {t('classes.title')}
+        </span>
+      </h2>
+      <p class="text-lg text-base-content/70 leading-relaxed">
+        {t('classes.subtitle')}
+      </p>
+    </div>
+
+    <!-- Class Schedule Tabs -->
+    <div class="mb-12">
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button class="btn btn-primary tab-btn active">{t('classes.allClasses')}</button>
+        <button class="btn btn-outline tab-btn">{t('classes.beginner')}</button>
+        <button class="btn btn-outline tab-btn">{t('classes.intermediate')}</button>
+        <button class="btn btn-outline tab-btn">{t('classes.advanced')}</button>
+        <button class="btn btn-outline tab-btn">{t('classes.meditation')}</button>
+      </div>
+
+      <!-- Today's Schedule -->
+      <div class="bg-base-200/50 rounded-2xl p-6 lg:p-8 mb-8">
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          Today's Schedule
+        </h3>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Class Card 1 -->
+          <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 class-card" data-level="beginner">
+            <div class="card-body p-6">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <div class="badge badge-primary mb-2">6:00 AM</div>
+                  <h4 class="text-lg font-bold">{t('classes.sunriseFlow')}</h4>
+                  <p class="text-sm text-base-content/60">{t('classes.instructor')}: {t('classes.sarahChen')}</p>
+                </div>
+                <div class="avatar">
+                  <div class="w-12 h-12 rounded-full">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="{t('classes.instructor')}" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="badge badge-outline badge-sm">{t('classes.beginner')}</span>
+                <span class="badge badge-outline badge-sm">45 min</span>
+                <span class="badge badge-success badge-outline badge-sm">{t('classes.liveNow')}</span>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <div class="flex -space-x-2">
+                  <div class="avatar">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user1" alt="{t('classes.students')}" />
+                    </div>
+                  </div>
+                  <div class="avatar">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user2" alt="{t('classes.students')}" />
+                    </div>
+                  </div>
+                  <div class="avatar placeholder">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100 bg-neutral text-neutral-content">
+                      <span class="text-xs">+12</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-sm">{t('classes.joinClass')}</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class Card 2 -->
+          <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 class-card" data-level="intermediate">
+            <div class="card-body p-6">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <div class="badge badge-secondary mb-2">12:00 PM</div>
+                  <h4 class="text-lg font-bold">{t('classes.powerYoga')}</h4>
+                  <p class="text-sm text-base-content/60">{t('classes.instructor')}: {t('classes.mikeJohnson')}</p>
+                </div>
+                <div class="avatar">
+                  <div class="w-12 h-12 rounded-full">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=mike" alt="{t('classes.instructor')}" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="badge badge-outline badge-sm">{t('classes.intermediate')}</span>
+                <span class="badge badge-outline badge-sm">60 min</span>
+                <span class="badge badge-warning badge-outline badge-sm">{t('classes.inHours', { hours: '2' })}</span>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <div class="flex -space-x-2">
+                  <div class="avatar">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user3" alt="{t('classes.students')}" />
+                    </div>
+                  </div>
+                  <div class="avatar">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user4" alt="{t('classes.students')}" />
+                    </div>
+                  </div>
+                  <div class="avatar placeholder">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100 bg-neutral text-neutral-content">
+                      <span class="text-xs">+8</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm">{t('classes.reserveSpot')}</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class Card 3 -->
+          <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 class-card" data-level="meditation">
+            <div class="card-body p-6">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <div class="badge badge-accent mb-2">7:00 PM</div>
+                  <h4 class="text-lg font-bold">{t('classes.eveningMeditation')}</h4>
+                  <p class="text-sm text-base-content/60">{t('classes.instructor')}: {t('classes.emmaWilson')}</p>
+                </div>
+                <div class="avatar">
+                  <div class="w-12 h-12 rounded-full">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=emma" alt="{t('classes.instructor')}" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="badge badge-outline badge-sm">{t('classes.allLevels')}</span>
+                <span class="badge badge-outline badge-sm">30 min</span>
+                <span class="badge badge-info badge-outline badge-sm">{t('classes.inHours', { hours: '9' })}</span>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <div class="flex -space-x-2">
+                  <div class="avatar">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user5" alt="{t('classes.students')}" />
+                    </div>
+                  </div>
+                  <div class="avatar">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user6" alt="{t('classes.students')}" />
+                    </div>
+                  </div>
+                  <div class="avatar placeholder">
+                    <div class="w-6 h-6 rounded-full border-2 border-base-100 bg-neutral text-neutral-content">
+                      <span class="text-xs">+15</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm">{t('classes.setReminder')}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Classes This Week -->
+      <div>
+        <h3 class="text-2xl font-bold mb-6">{t('classes.weekSchedule')}</h3>
+        <div class="overflow-x-auto">
+          <table class="table table-zebra w-full">
+            <thead>
+              <tr>
+                <th>{t('classes.day')}</th>
+                <th>{t('classes.class')}</th>
+                <th>{t('classes.instructor')}</th>
+                <th>{t('classes.time')}</th>
+                <th>{t('classes.duration')}</th>
+                <th>{t('classes.level')}</th>
+                <th>{t('classes.action')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hover">
+                <td>{t('classes.monday')}</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span>{t('classes.gentleHatha')}</span>
+                    <span class="badge badge-primary badge-sm">New</span>
+                  </div>
+                </td>
+                <td>{t('classes.sarahChen')}</td>
+                <td>6:00 AM</td>
+                <td>45 min</td>
+                <td><span class="badge badge-outline badge-sm">{t('classes.beginner')}</span></td>
+                <td><button class="btn btn-outline btn-xs">{t('classes.book')}</button></td>
+              </tr>
+              <tr class="hover">
+                <td>{t('classes.tuesday')}</td>
+                <td>{t('classes.vinyasaFlow')}</td>
+                <td>{t('classes.mikeJohnson')}</td>
+                <td>7:00 PM</td>
+                <td>60 min</td>
+                <td><span class="badge badge-outline badge-sm">{t('classes.intermediate')}</span></td>
+                <td><button class="btn btn-outline btn-xs">{t('classes.book')}</button></td>
+              </tr>
+              <tr class="hover">
+                <td>{t('classes.wednesday')}</td>
+                <td>{t('classes.yinYoga')}</td>
+                <td>{t('classes.emmaWilson')}</td>
+                <td>5:30 PM</td>
+                <td>75 min</td>
+                <td><span class="badge badge-outline badge-sm">{t('classes.allLevels')}</span></td>
+                <td><button class="btn btn-outline btn-xs">{t('classes.book')}</button></td>
+              </tr>
+              <tr class="hover">
+                <td>{t('classes.thursday')}</td>
+                <td>{t('classes.ashtanga')}</td>
+                <td>{t('classes.davidLee')}</td>
+                <td>6:00 AM</td>
+                <td>90 min</td>
+                <td><span class="badge badge-outline badge-sm">{t('classes.advanced')}</span></td>
+                <td><button class="btn btn-outline btn-xs">{t('classes.book')}</button></td>
+              </tr>
+              <tr class="hover">
+                <td>{t('classes.friday')}</td>
+                <td>{t('classes.restorativeYoga')}</td>
+                <td>{t('classes.sarahChen')}</td>
+                <td>7:00 PM</td>
+                <td>60 min</td>
+                <td><span class="badge badge-outline badge-sm">{t('classes.beginner')}</span></td>
+                <td><button class="btn btn-outline btn-xs">{t('classes.book')}</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Tab functionality for class filtering
+  function initializeClassFilters() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const classCards = document.querySelectorAll('.class-card');
+
+    // Filter level mappings for different languages
+    const filterMap = {
+      'all classes': 'all',
+      'alle kurse': 'all',
+      'все курсы': 'all',
+      'todos los cursos': 'all',
+      'tüm kurslar': 'all',
+      'beginner': 'beginner',
+      'anfänger': 'beginner',
+      'начинающий': 'beginner',
+      'principiante': 'beginner',
+      'başlangıç': 'beginner',
+      'intermediate': 'intermediate',
+      'mittelstufe': 'intermediate',
+      'средний': 'intermediate',
+      'intermedio': 'intermediate',
+      'orta seviye': 'intermediate',
+      'advanced': 'advanced',
+      'fortgeschritten': 'advanced',
+      'продвинутый': 'advanced',
+      'avanzado': 'advanced',
+      'ileri seviye': 'advanced',
+      'медитация': 'meditation',
+      'meditación': 'meditation',
+      'meditasyon': 'meditation',
+      // Title case versions
+      'Anfänger': 'beginner',
+      'Principiante': 'beginner',
+      'Başlangıç': 'beginner',
+      'Mittelstufe': 'intermediate',
+      'Intermedio': 'intermediate',
+      'Orta seviye': 'intermediate',
+      'Fortgeschritten': 'advanced',
+      'Avanzado': 'advanced',
+      'İleri seviye': 'advanced',
+      'Meditación': 'meditation',
+      'Meditasyon': 'meditation'
+    };
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active', 'btn-primary');
+          btn.classList.add('btn-outline');
+        });
+
+        // Add active class to clicked button
+        button.classList.remove('btn-outline');
+        button.classList.add('active', 'btn-primary');
+
+        // Filter classes
+        const buttonText = button.textContent.toLowerCase().trim();
+        const filterLevel = filterMap[buttonText] || buttonText;
+        filterClasses(filterLevel, classCards);
+      });
+    });
+  }
+
+  function filterClasses(level, cards) {
+    cards.forEach(card => {
+      if (level === 'all') {
+        card.style.display = 'block';
+        return;
+      }
+
+      const cardLevel = card.getAttribute('data-level');
+      if (cardLevel === level) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initializeClassFilters);
+</script>
+

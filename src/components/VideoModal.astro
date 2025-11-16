@@ -1,0 +1,399 @@
+---
+// Video Modal Component with embedded YouTube player
+import { getTranslation } from '../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+
+  // Replace dynamic values in translations
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+
+  return translation;
+};
+---
+
+<!-- Video Modal -->
+<div
+  id="video-modal"
+  class="modal modal-bottom sm:modal-middle"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="video-modal-title"
+>
+  <div class="modal-box max-w-4xl p-0 bg-base-100 rounded-2xl shadow-2xl">
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between p-6 border-b border-base-300">
+      <h3 id="video-modal-title" class="text-xl font-bold">
+        {t('videoModal.title')}
+      </h3>
+      <button
+        type="button"
+        class="btn btn-sm btn-circle btn-ghost"
+        onclick="closeVideoModal()"
+        aria-label={t('videoModal.close')}
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Video Container -->
+    <div class="relative w-full aspect-video bg-black rounded-b-2xl overflow-hidden">
+      <!-- YouTube iframe with best practices -->
+      <iframe
+        id="demo-video"
+        src="https://www.youtube-nocookie.com/embed/yUHdD_w2eaI?enablejsapi=1&rel=0&modestbranding=1&autoplay=0&showinfo=0&cc_load_policy=0&iv_load_policy=3&autohide=1&controls=1&disablekb=1&fs=0&hl=en&loop=0"
+        title="{t('videoModal.iframeTitle')}"
+        class="w-full h-full"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
+      ></iframe>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="p-6 bg-base-200/50 rounded-b-2xl">
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <p class="text-sm text-base-content/70">
+          {t('videoModal.description')}
+        </p>
+        <div class="flex gap-3">
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="closeVideoModalAndStartTrial()"
+          >
+            {t('videoModal.startTrial')}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline"
+            onclick="closeVideoModal()"
+          >
+            {t('videoModal.close')}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Backdrop with proper click handling -->
+<div
+  id="video-modal-backdrop"
+  class="modal-backdrop"
+  onclick="handleBackdropClick(event)"
+  style="display: none;"
+  aria-hidden="true"
+></div>
+
+<style>
+  /* Ensure proper z-index and backdrop behavior */
+  #video-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(4px);
+  }
+
+  #video-modal {
+    z-index: 1000;
+  }
+
+  /* Responsive video container */
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Smooth transitions */
+  .modal-backdrop {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Focus styles for accessibility */
+  button:focus-visible {
+    outline: 2px solid hsl(var(--focus));
+    outline-offset: 2px;
+  }
+
+  /* Loading state for iframe */
+  iframe {
+    background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  /* Block YouTube ads and overlays */
+  iframe[src*="youtube"] {
+    position: relative;
+  }
+
+  /* Hide ad-related elements that might appear */
+  .ytp-ad-module,
+  .ytp-ad-overlay-container,
+  .ytp-ad-preview-container,
+  .ytp-paid-content-overlay,
+  .ytp-autonav-endscreen-upnext-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+
+  /* Hide YouTube branding and suggestions */
+  .ytp-watermark,
+  .ytp-pause-overlay,
+  .ytp-endscreen {
+    display: none !important;
+  }
+</style>
+
+<script define:vars={{}}>
+  // Make functions globally available by attaching to window
+  window.JogaVideoModal = window.JogaVideoModal || {};
+
+  // YouTube API integration for better control
+  let player = null;
+  let isModalOpen = false;
+
+  // Function to open video modal
+  window.JogaVideoModal.openVideoModal = function() {
+    const modal = document.getElementById('video-modal');
+    const backdrop = document.getElementById('video-modal-backdrop');
+
+    // Show modal and backdrop
+    modal.classList.add('modal-open');
+    backdrop.style.display = 'block';
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+
+    // Focus management for accessibility
+    setTimeout(() => {
+      const closeButton = modal.querySelector('button[aria-label*="close"], button[aria-label*="Close"]');
+      if (closeButton) {
+        closeButton.focus();
+      }
+    }, 100);
+
+    isModalOpen = true;
+
+    // Load YouTube API if not already loaded
+    window.JogaVideoModal.loadYouTubeAPI();
+  };
+
+  // Function to close video modal
+  window.JogaVideoModal.closeVideoModal = function() {
+    const modal = document.getElementById('video-modal');
+    const backdrop = document.getElementById('video-modal-backdrop');
+
+    // Pause video if player exists
+    if (player && player.pauseVideo) {
+      player.pauseVideo();
+    }
+
+    // Clear ad blocking interval
+    if (window.JogaVideoModal.adBlockInterval) {
+      clearInterval(window.JogaVideoModal.adBlockInterval);
+    }
+
+    // Hide modal and backdrop
+    modal.classList.remove('modal-open');
+    backdrop.style.display = 'none';
+
+    // Restore body scroll
+    document.body.style.overflow = '';
+
+    isModalOpen = false;
+
+    // Return focus to the trigger button
+    const triggerButton = document.querySelector('[onclick*="playIntroVideo"]');
+    if (triggerButton) {
+      triggerButton.focus();
+    }
+  };
+
+  // Handle backdrop click (close modal when clicking outside)
+  window.JogaVideoModal.handleBackdropClick = function(event) {
+    if (event.target === event.currentTarget) {
+      window.JogaVideoModal.closeVideoModal();
+    }
+  };
+
+  // Close modal and navigate to trial
+  window.JogaVideoModal.closeVideoModalAndStartTrial = function() {
+    window.JogaVideoModal.closeVideoModal();
+    // Navigate to trial section or signup
+    const trialButton = document.querySelector('[href*="trial"], [href*="signup"]');
+    if (trialButton) {
+      trialButton.click();
+    } else {
+      // Fallback: scroll to CTA section
+      const ctaSection = document.getElementById('cta-form');
+      if (ctaSection) {
+        ctaSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  // Load YouTube API
+  window.JogaVideoModal.loadYouTubeAPI = function() {
+    if (window.YT && window.YT.Player) {
+      window.JogaVideoModal.initYouTubePlayer();
+      return;
+    }
+
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.async = true;
+
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Set up global callback
+    window.onYouTubeIframeAPIReady = window.JogaVideoModal.initYouTubePlayer;
+  };
+
+  // Initialize YouTube player
+  window.JogaVideoModal.initYouTubePlayer = function() {
+    if (!window.YT || !window.YT.Player) return;
+
+    player = new window.YT.Player('demo-video', {
+      events: {
+        onReady: window.JogaVideoModal.onPlayerReady,
+        onStateChange: window.JogaVideoModal.onPlayerStateChange
+      },
+      playerVars: {
+        rel: 0,                // Don't show related videos
+        modestbranding: 1,     // Show minimal YouTube branding
+        showinfo: 0,           // Don't show video info
+        controls: 1,           // Show controls
+        autohide: 1,           // Auto hide controls
+        cc_load_policy: 0,     // Don't load captions by default
+        iv_load_policy: 3,     // Don't show video annotations
+        disablekb: 1,          // Disable keyboard controls
+        fs: 0,                 // Disable fullscreen button
+        hl: 'en',              // Set language to English
+        loop: 0,               // Don't loop video
+        start: 0,              // Start at beginning
+        end: 0,                // Play until end
+        origin: window.location.origin // Set origin for security
+      }
+    });
+  };
+
+  // YouTube player ready callback
+  window.JogaVideoModal.onPlayerReady = function(event) {
+    // Player is ready, we can now control it
+    if (isModalOpen) {
+      event.target.playVideo();
+    }
+
+    // Block ads and unwanted elements after player is ready
+    window.JogaVideoModal.blockAdsAndOverlays();
+  };
+
+  // Function to block ads and overlays
+  window.JogaVideoModal.blockAdsAndOverlays = function() {
+    const iframe = document.getElementById('demo-video');
+    if (!iframe) return;
+
+    // Wait for iframe content to load
+    setTimeout(() => {
+      try {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        if (iframeDoc) {
+          // Create style to block ads
+          const style = iframeDoc.createElement('style');
+          style.textContent = `
+            .ytp-ad-module, .ytp-ad-overlay-container, .ytp-ad-preview-container,
+            .ytp-paid-content-overlay, .ytp-autonav-endscreen-upnext-container,
+            .ytp-watermark, .ytp-pause-overlay, .ytp-endscreen {
+              display: none !important;
+              visibility: hidden !important;
+              opacity: 0 !important;
+              width: 0 !important;
+              height: 0 !important;
+            }
+
+            .video-ads, .ad-container, .ad-display {
+              display: none !important;
+            }
+          `;
+          iframeDoc.head.appendChild(style);
+        }
+      } catch (e) {
+        // Cross-origin restrictions - fallback to parent document targeting
+        console.log('Cannot access iframe content due to cross-origin restrictions');
+      }
+
+      // Also try to hide elements from parent document
+      const adElements = document.querySelectorAll('.ytp-ad-module, .ytp-ad-overlay-container, .ytp-watermark, .ytp-endscreen');
+      adElements.forEach(el => {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
+        el.style.opacity = '0';
+      });
+    }, 1000);
+
+    // Continue blocking ads periodically
+    window.JogaVideoModal.adBlockInterval = setInterval(() => {
+      window.JogaVideoModal.blockAdsAndOverlays();
+    }, 3000);
+  };
+
+  // YouTube player state change callback
+  window.JogaVideoModal.onPlayerStateChange = function(event) {
+    // Handle player state changes if needed
+    if (event.data === window.YT.PlayerState.ENDED) {
+      // Video ended - you might want to show a call-to-action
+      console.log('Video ended');
+    }
+  };
+
+  // Keyboard navigation support
+  document.addEventListener('keydown', (event) => {
+    if (!isModalOpen) return;
+
+    switch (event.key) {
+      case 'Escape':
+        window.JogaVideoModal.closeVideoModal();
+        break;
+      case 'Tab':
+        // Trap focus within modal
+        const modal = document.getElementById('video-modal');
+        const focusableElements = modal.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+        break;
+    }
+  });
+
+  // Global function that can be called from other components
+  window.playIntroVideo = window.JogaVideoModal.openVideoModal;
+
+  // Also make individual functions globally available for onclick handlers
+  window.closeVideoModal = window.JogaVideoModal.closeVideoModal;
+  window.closeVideoModalAndStartTrial = window.JogaVideoModal.closeVideoModalAndStartTrial;
+  window.handleBackdropClick = window.JogaVideoModal.handleBackdropClick;
+</script>

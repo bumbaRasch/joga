@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Terms of Service - Joga" description="Terms of Service for Joga yoga and wellness platform">
+  <main class="min-h-screen bg-base-100 theme-transition">
+    <div class="container mx-auto px-4 py-16 lg:py-24">
+      <!-- Header -->
+      <div class="max-w-4xl mx-auto mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Terms of Service
+          </span>
+        </h1>
+        <p class="text-lg text-base-content/70">
+          Effective Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+        <div class="badge badge-outline badge-lg mt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="max-w-4xl mx-auto prose prose-lg">
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h2 class="card-title text-2xl mb-4">Agreement to Terms</h2>
+            <p class="text-base-content/80">
+              By accessing and using Joga ("the Service"), you agree to be bound by these Terms of Service ("Terms").
+              If you disagree with any part of these terms, then you may not access the Service.
+            </p>
+          </div>
+        </div>
+
+        <!-- Medical Disclaimer -->
+        <div class="card bg-primary/5 border border-primary/20 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4 text-primary">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+              </svg>
+              Medical & Health Disclaimer
+            </h3>
+            <div class="space-y-3 text-base-content/80">
+              <p><strong>Important:</strong> Joga is not a medical service and does not provide medical advice, diagnosis, or treatment.</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Consult with a healthcare professional before beginning any yoga or fitness program</li>
+                <li>Stop immediately if you experience pain, dizziness, or discomfort</li>
+                <li>Our AI recommendations are not medical advice and should not replace professional medical consultation</li>
+                <li>Pregnant individuals, seniors, and those with pre-existing conditions should seek medical clearance</li>
+                <li>We are not liable for injuries or health issues resulting from your use of our services</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Transparency -->
+        <div class="card bg-secondary/5 border border-secondary/20 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4 text-secondary">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 7H7v6h6V7z"></path>
+                <path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2z" clip-rule="evenodd"></path>
+              </svg>
+              AI & Personalization (2025-2026 Compliance)
+            </h3>
+            <div class="space-y-3 text-base-content/80">
+              <p>Our service uses artificial intelligence to provide personalized yoga recommendations and progress tracking.</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>AI Transparency:</strong> You will always know when content is AI-generated or AI-curated</li>
+                <li><strong>Data Processing:</strong> AI processes your workout data, preferences, and feedback to improve recommendations</li>
+                <li><strong>Human Oversight:</strong> All AI-generated content is reviewed by certified yoga instructors</li>
+                <li><strong>Accuracy:</strong> While we strive for accuracy, AI recommendations may not always be perfect for your specific needs</li>
+                <li><strong>Control:</strong> You can opt out of AI personalization and use manual class selection</li>
+                <li><strong>Continuous Improvement:</strong> Your usage helps improve our AI algorithms for all users</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4">Services Provided</h3>
+            <div class="space-y-3 text-base-content/80">
+              <p>Joga provides the following services:</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Live Classes:</strong> Real-time yoga instruction with certified instructors</li>
+                <li><strong>Recorded Content:</strong> On-demand yoga classes and tutorials</li>
+                <li><strong>AI Personalization:</strong> Customized workout recommendations based on your goals and fitness level</li>
+                <li><strong>Progress Tracking:</strong> Analytics and insights about your yoga practice</li>
+                <li><strong>Community Features:</strong> Forums and social interaction with other members</li>
+                <li><strong>Mobile Apps:</strong> iOS and Android applications for on-the-go access</li>
+                <li><strong>Virtual Reality:</strong> Immersive yoga experiences (where available)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Responsibilities -->
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4">User Responsibilities</h3>
+            <div class="space-y-3 text-base-content/80">
+              <p>As a user of Joga, you agree to:</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Provide accurate and truthful information when creating your account</li>
+                <li>Keep your login credentials secure and confidential</li>
+                <li>Use the service for personal, non-commercial purposes only</li>
+                <li>Respect other community members and instructors</li>
+                <li>Not share, reproduce, or distribute copyrighted content</li>
+                <li>Comply with all applicable laws and regulations</li>
+                <li>Report any bugs, security issues, or violations of these terms</li>
+                <li>Practice safely and within your physical limits</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment & Subscription -->
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4">Payment & Subscription Terms</h3>
+            <div class="space-y-3 text-base-content/80">
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Subscription Plans:</strong> We offer monthly and annual subscription options</li>
+                <li><strong>Payment:</strong> All payments are processed securely through third-party payment processors</li>
+                <li><strong>Auto-Renewal:</strong> Subscriptions automatically renew unless canceled before the renewal date</li>
+                <li><strong>Cancellation:</strong> You can cancel anytime through your account settings</li>
+                <li><strong>Refunds:</strong> Refunds are handled on a case-by-case basis within 7 days of purchase</li>
+                <li><strong>Price Changes:</strong> We may change pricing with 30 days notice for existing subscribers</li>
+                <li><strong>Free Trials:</strong> Trial periods convert to paid subscriptions unless canceled</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intellectual Property -->
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4">Intellectual Property</h3>
+            <div class="space-y-3 text-base-content/80">
+              <p><strong>Our Content:</strong> All Joga content, including videos, text, graphics, and software, is protected by copyright, trademark, and other intellectual property laws.</p>
+              <p><strong>Your Content:</strong> You retain ownership of any content you contribute, but grant us a license to use it to improve our services.</p>
+              <p><strong>Restrictions:</strong> You may not:</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Copy, modify, or distribute our proprietary content</li>
+                <li>Reverse engineer or attempt to extract source code</li>
+                <li>Use our content for commercial purposes without permission</li>
+                <li>Remove or modify copyright notices</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Limitation of Liability -->
+        <div class="card bg-error/5 border border-error/20 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4 text-error">Limitation of Liability</h3>
+            <div class="space-y-3 text-base-content/80">
+              <p><strong>Maximum Disclaimer:</strong> To the fullest extent permitted by law, Joga shall not be liable for:</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Any indirect, incidental, special, or consequential damages</li>
+                <li>Injuries, health issues, or medical conditions arising from your use of our services</li>
+                <li>Loss of data, revenue, or business opportunities</li>
+                <li>Technical issues, service interruptions, or system failures</li>
+                <li>Accuracy of AI recommendations or personalized content</li>
+                <li>Actions or content of third-party instructors or users</li>
+              </ul>
+              <p><strong>Liability Cap:</strong> Our total liability shall not exceed the amount you paid for our services in the 12 months preceding the claim.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Availability -->
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4">Service Availability & Changes</h3>
+            <div class="space-y-3 text-base-content/80">
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Availability:</strong> We strive for 99.9% uptime but cannot guarantee uninterrupted service</li>
+                <li><strong>Maintenance:</strong> Scheduled maintenance may be required with advance notice when possible</li>
+                <li><strong>Service Changes:</strong> We may modify, suspend, or discontinue features with reasonable notice</li>
+                <li><strong>Termination:</strong> We reserve the right to terminate accounts for violations of these terms</li>
+                <li><strong>Platform Updates:</strong> Regular updates may include new features and modified functionality</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Governing Law -->
+        <div class="card bg-base-200/30 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4">Governing Law & Disputes</h3>
+            <div class="space-y-3 text-base-content/80">
+              <p>These Terms are governed by the laws of [Your Jurisdiction], without regard to conflict of law principles.</p>
+              <p><strong>Dispute Resolution:</strong> Any disputes will be resolved through binding arbitration in accordance with [Arbitration Rules].</p>
+              <p><strong>Class Action Waiver:</strong> You agree to resolve disputes individually and waive any right to participate in class actions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="card bg-success/5 border border-success/20 shadow-xl mb-8">
+          <div class="card-body p-8">
+            <h3 class="card-title text-2xl mb-4 text-success">Contact Information</h3>
+            <div class="space-y-3 text-base-content/80">
+              <p>If you have questions about these Terms of Service, please contact us:</p>
+              <ul class="space-y-2">
+                <li><strong>Email:</strong> <a href="mailto:legal@joga.com" class="link link-primary">legal@joga.com</a></li>
+                <li><strong>Support:</strong> <a href="mailto:support@joga.com" class="link link-primary">support@joga.com</a></li>
+                <li><strong>Website:</strong> <a href="https://joga.com/contact" class="link link-primary">joga.com/contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Last Updated Notice -->
+        <div class="text-center mt-12 p-6 bg-base-200/20 rounded-xl">
+          <p class="text-sm text-base-content/60">
+            These Terms of Service were last updated on {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}.
+            We may update these terms periodically, and continued use of our service constitutes acceptance of any changes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

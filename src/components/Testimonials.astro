@@ -1,0 +1,282 @@
+---
+// Testimonials Section with social proof
+import { getTranslation } from '../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+
+  // Replace dynamic values in translations
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+
+  return translation;
+};
+---
+
+<section id="testimonials" class="py-20 lg:py-32 bg-base-200/30 theme-transition">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="badge badge-outline badge-lg mb-4">
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+          {t('testimonials.successStories')}
+        </span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">
+        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          {t('testimonials.title')}
+        </span>
+      </h2>
+      <p class="text-lg text-base-content/70 leading-relaxed">
+        {t('testimonials.subtitle')}
+      </p>
+    </div>
+
+    <!-- Testimonial Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-primary mb-2">50,000+</div>
+        <div class="text-sm text-base-content/60">{t('testimonials.stats.members')}</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-secondary mb-2">4.9/5</div>
+        <div class="text-sm text-base-content/60">{t('testimonials.stats.rating')}</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-accent mb-2">1M+</div>
+        <div class="text-sm text-base-content/60">{t('testimonials.stats.classes')}</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-primary mb-2">95%</div>
+        <div class="text-sm text-base-content/60">{t('testimonials.stats.retention')}</div>
+      </div>
+    </div>
+
+    <!-- Featured Testimonial -->
+    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl p-8 lg:p-12 mb-16">
+      <div class="flex flex-col lg:flex-row gap-8 items-center">
+        <div class="lg:w-1/3">
+          <div class="avatar">
+            <div class="w-32 h-32 rounded-2xl">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=featured" alt="Featured member" />
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <div class="font-bold text-lg">{t('testimonials.featured.name')}</div>
+            <div class="text-base-content/60">{t('testimonials.featured.memberSince')}</div>
+            <div class="flex justify-center mt-2">
+              <div class="flex">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg class="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-2/3">
+          <blockquote class="text-lg md:text-xl text-base-content/80 leading-relaxed italic">
+            "{t('testimonials.featured.testimonial')}"
+          </blockquote>
+          <div class="flex flex-wrap gap-2 mt-6">
+            <span class="badge badge-primary badge-outline">{t('testimonials.featured.badges.weightLoss')}</span>
+            <span class="badge badge-secondary badge-outline">{t('testimonials.featured.badges.flexibility')}</span>
+            <span class="badge badge-accent badge-outline">{t('testimonials.featured.badges.mindfulness')}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div class="card-body p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-16 h-16 rounded-full">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=member1" alt="Member" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold">{t('testimonials.members.robert.name')}</div>
+              <div class="text-sm text-base-content/60">{t('testimonials.members.robert.profession')}</div>
+              <div class="flex mt-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p class="text-base-content/70 mb-4">
+            "{t('testimonials.members.robert.testimonial')}"
+          </p>
+          <div class="badge badge-outline badge-sm">{t('testimonials.members.robert.duration')}</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div class="card-body p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-16 h-16 rounded-full">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=member2" alt="Member" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold">{t('testimonials.members.amanda.name')}</div>
+              <div class="text-sm text-base-content/60">{t('testimonials.members.amanda.profession')}</div>
+              <div class="flex mt-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p class="text-base-content/70 mb-4">
+            "{t('testimonials.members.amanda.testimonial')}"
+          </p>
+          <div class="badge badge-outline badge-sm">{t('testimonials.members.amanda.duration')}</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div class="card-body p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-16 h-16 rounded-full">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=member3" alt="Member" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold">{t('testimonials.members.marcus.name')}</div>
+              <div class="text-sm text-base-content/60">{t('testimonials.members.marcus.profession')}</div>
+              <div class="flex mt-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p class="text-base-content/70 mb-4">
+            "{t('testimonials.members.marcus.testimonial')}"
+          </p>
+          <div class="badge badge-outline badge-sm">{t('testimonials.members.marcus.duration')}</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 4 -->
+      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div class="card-body p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-16 h-16 rounded-full">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=member4" alt="Member" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold">{t('testimonials.members.lisa.name')}</div>
+              <div class="text-sm text-base-content/60">{t('testimonials.members.lisa.profession')}</div>
+              <div class="flex mt-1">
+                {[1, 2, 3, 4].map((star) => (
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+                <svg class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <p class="text-base-content/70 mb-4">
+            "{t('testimonials.members.lisa.testimonial')}"
+          </p>
+          <div class="badge badge-outline badge-sm">{t('testimonials.members.lisa.duration')}</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 5 -->
+      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div class="card-body p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-16 h-16 rounded-full">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=member5" alt="Member" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold">{t('testimonials.members.david.name')}</div>
+              <div class="text-sm text-base-content/60">{t('testimonials.members.david.profession')}</div>
+              <div class="flex mt-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p class="text-base-content/70 mb-4">
+            "{t('testimonials.members.david.testimonial')}"
+          </p>
+          <div class="badge badge-outline badge-sm">{t('testimonials.members.david.duration')}</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 6 -->
+      <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div class="card-body p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-16 h-16 rounded-full">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=member6" alt="Member" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold">{t('testimonials.members.rachel.name')}</div>
+              <div class="text-sm text-base-content/60">{t('testimonials.members.rachel.profession')}</div>
+              <div class="flex mt-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p class="text-base-content/70 mb-4">
+            "{t('testimonials.members.rachel.testimonial')}"
+          </p>
+          <div class="badge badge-outline badge-sm">{t('testimonials.members.rachel.duration')}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Proof -->
+    <div class="mt-16 text-center">
+      <p class="text-base-content/60 mb-4">{t('testimonials.asFeaturedIn')}</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+        <div class="text-lg font-bold">{t('testimonials.featuredIn.yogaJournal')}</div>
+        <div class="text-lg font-bold">{t('testimonials.featuredIn.mindful')}</div>
+        <div class="text-lg font-bold">{t('testimonials.featuredIn.wellGood')}</div>
+        <div class="text-lg font-bold">{t('testimonials.featuredIn.healthMagazine')}</div>
+        <div class="text-lg font-bold">{t('testimonials.featuredIn.techCrunch')}</div>
+      </div>
+    </div>
+  </div>
+</section>

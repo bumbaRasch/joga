@@ -1,0 +1,272 @@
+---
+// Pricing Section with tiered plans
+import { getTranslation } from '../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+
+  // Replace dynamic values in translations
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+
+  return translation;
+};
+---
+
+<section id="pricing" class="py-20 lg:py-32 bg-base-100 theme-transition">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="badge badge-outline badge-lg mb-4">
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path>
+          </svg>
+          Simple Pricing
+        </span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">
+        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          {t('pricing.title')}
+        </span>
+      </h2>
+      <p class="text-lg text-base-content/70 leading-relaxed">
+        {t('pricing.subtitle')}
+      </p>
+    </div>
+
+    <!-- Billing Toggle -->
+    <div class="flex justify-center mb-12">
+      <div class="bg-base-200 rounded-full p-1 inline-flex">
+        <button class="btn btn-sm rounded-full px-6" id="monthly-btn">{t('pricing.monthly')}</button>
+        <button class="btn btn-sm rounded-full px-6" id="annual-btn">{t('pricing.annual')}</button>
+      </div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <!-- Free Plan -->
+      <div class="card bg-base-100 shadow-xl border-2 border-base-300 hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+        <div class="card-body p-6 lg:p-8 flex flex-col flex-1">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold mb-2">{t('pricing.plans.free')}</h3>
+            <p class="text-base-content/60 mb-4">{t('pricing.descriptions.free')}</p>
+            <div class="text-4xl font-bold mb-1">
+              {t('pricing.prices.free')}
+              <span class="text-lg font-normal text-base-content/60">/month</span>
+            </div>
+          </div>
+
+          <div class="flex-grow">
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.basicClasses')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.progressTracking')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.community')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.mobileAccess')}</span>
+              </li>
+              <li class="flex items-center gap-3 opacity-40">
+                <svg class="w-5 h-5 text-base-content flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.liveClasses')}</span>
+              </li>
+              <li class="flex items-center gap-3 opacity-40">
+                <svg class="w-5 h-5 text-base-content flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.aiRecommendations')}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8">
+            <button class="btn btn-outline btn-primary w-full">{t('pricing.buttons.getStartedFree')}</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro Plan (Popular) -->
+      <div class="card bg-gradient-to-b from-primary/5 to-base-100 shadow-2xl border-2 border-primary hover:shadow-3xl transition-all duration-300 relative scale-105 flex flex-col h-full">
+        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2">
+          <div class="badge badge-primary">{t('pricing.mostPopular')}</div>
+        </div>
+        <div class="card-body p-6 lg:p-8 flex flex-col flex-1">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold mb-2">{t('pricing.plans.pro')}</h3>
+            <p class="text-base-content/60 mb-4">{t('pricing.descriptions.pro')}</p>
+            <div class="text-4xl font-bold mb-1">
+              <span class="monthly-price">{t('pricing.prices.proMonthly')}</span>
+              <span class="annual-price hidden">{t('pricing.prices.proAnnual')}</span>
+              <span class="text-lg font-normal text-base-content/60">/month</span>
+            </div>
+            <p class="text-sm text-success font-medium">{t('pricing.saveWithAnnual', { amount: '48' })}</p>
+          </div>
+
+          <div class="flex-grow">
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.basicClasses')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.liveClasses')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.aiRecommendations')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.advancedAnalytics')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.downloadable')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.prioritySupport')}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8">
+            <button class="btn btn-primary w-full">{t('pricing.buttons.startFreeTrial')}</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Plan -->
+      <div class="card bg-base-100 shadow-xl border-2 border-base-300 hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+        <div class="card-body p-6 lg:p-8 flex flex-col flex-1">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold mb-2">{t('pricing.plans.premium')}</h3>
+            <p class="text-base-content/60 mb-4">{t('pricing.descriptions.premium')}</p>
+            <div class="text-4xl font-bold mb-1">
+              <span class="monthly-price">{t('pricing.prices.premiumMonthly')}</span>
+              <span class="annual-price hidden">{t('pricing.prices.premiumAnnual')}</span>
+              <span class="text-lg font-normal text-base-content/60">/month</span>
+            </div>
+            <p class="text-sm text-success font-medium">{t('pricing.saveWithAnnual', { amount: '96' })}</p>
+          </div>
+
+          <div class="flex-grow">
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.liveClasses')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.coaching')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.mealPlans')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.workshops')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.certification')}</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-success flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{t('pricing.features.vipSupport')}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8">
+            <button class="btn btn-outline btn-secondary w-full">{t('pricing.buttons.contactSales')}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-20 max-w-4xl mx-auto">
+      <h3 class="text-2xl font-bold text-center mb-8">{t('pricing.faq.title')}</h3>
+      <div class="space-y-4">
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="radio" name="faq-1" checked="checked" />
+          <div class="collapse-title text-lg font-medium">{t('pricing.faq.cancel')}</div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">{t('pricing.faq.cancelAnswer')}</p>
+          </div>
+        </div>
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="radio" name="faq-1" />
+          <div class="collapse-title text-lg font-medium">{t('pricing.faq.trial')}</div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">{t('pricing.faq.trialAnswer')}</p>
+          </div>
+        </div>
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="radio" name="faq-1" />
+          <div class="collapse-title text-lg font-medium">{t('pricing.faq.equipment')}</div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">{t('pricing.faq.equipmentAnswer')}</p>
+          </div>
+        </div>
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="radio" name="faq-1" />
+          <div class="collapse-title text-lg font-medium">{t('pricing.faq.levels')}</div>
+          <div class="collapse-content">
+            <p class="text-base-content/70">{t('pricing.faq.levelsAnswer')}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
