@@ -77,6 +77,42 @@ const t = (key: string, values: Record<string, string> = {}) => {
     </div>
   </nav>
 
+  <!-- Scroll Progress Indicator -->
+  <div class="fixed top-0 left-0 w-full h-1 bg-base-200 z-50">
+    <div id="scroll-progress" class="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300" style="width: 0%"></div>
+  </div>
+
+  <!-- Side Navigation Dots -->
+  <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
+    <div class="flex flex-col gap-4">
+      <a href="#hero" class="nav-dot w-3 h-3 bg-base-300 rounded-full transition-all duration-300 hover:bg-primary hover:scale-150" data-section="hero" title="Home">
+        <span class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-base-100 text-base-content px-2 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">Home</span>
+      </a>
+      <a href="#features" class="nav-dot w-3 h-3 bg-base-300 rounded-full transition-all duration-300 hover:bg-primary hover:scale-150" data-section="features" title="Features">
+        <span class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-base-100 text-base-content px-2 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">Features</span>
+      </a>
+      <a href="#classes" class="nav-dot w-3 h-3 bg-base-300 rounded-full transition-all duration-300 hover:bg-primary hover:scale-150" data-section="classes" title="Classes">
+        <span class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-base-100 text-base-content px-2 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">Classes</span>
+      </a>
+      <a href="#testimonials" class="nav-dot w-3 h-3 bg-base-300 rounded-full transition-all duration-300 hover:bg-primary hover:scale-150" data-section="testimonials" title="Testimonials">
+        <span class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-base-100 text-base-content px-2 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">Testimonials</span>
+      </a>
+      <a href="#pricing" class="nav-dot w-3 h-3 bg-base-300 rounded-full transition-all duration-300 hover:bg-primary hover:scale-150" data-section="pricing" title="Pricing">
+        <span class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-base-100 text-base-content px-2 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">Pricing</span>
+      </a>
+      <a href="#cta" class="nav-dot w-3 h-3 bg-base-300 rounded-full transition-all duration-300 hover:bg-primary hover:scale-150" data-section="cta" title="Get Started">
+        <span class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-base-100 text-base-content px-2 py-1 rounded text-xs opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">Get Started</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator Arrow -->
+  <div class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 text-base-content/60" onclick="scrollToNextSection()">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+
   <!-- Hero Content -->
   <div class="hero-content text-center px-4 pt-20 pb-10 relative z-10">
     <div class="max-w-4xl mx-auto">
@@ -156,6 +192,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
   declare global {
     interface Window {
       toggleMobileMenu: () => void;
+      scrollToNextSection: () => void;
     }
   }
 
@@ -167,10 +204,28 @@ const t = (key: string, values: Record<string, string> = {}) => {
     }
   };
 
+  // Scroll to next section functionality
+  window.scrollToNextSection = function() {
+    const sections = document.querySelectorAll('section[id]');
+    const currentScroll = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + currentScroll;
+
+      if (sectionTop > currentScroll + windowHeight * 0.5) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        break;
+      }
+    }
+  };
+
   // Video modal functionality is handled by the VideoModal component
   // The playIntroVideo function is already defined globally by VideoModal
 
-  // Close mobile menu when clicking on links
+  // Enhanced navigation and scroll functionality
   document.addEventListener('DOMContentLoaded', () => {
     const mobileLinks = document.querySelectorAll('#mobile-menu a');
     mobileLinks.forEach(link => {
@@ -180,6 +235,120 @@ const t = (key: string, values: Record<string, string> = {}) => {
           menu.classList.add('hidden');
         }
       });
+    });
+
+    // Enhanced smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function (e: Event) {
+        e.preventDefault();
+        const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href')?.substring(1);
+        const targetSection = targetId ? document.getElementById(targetId) : null;
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Scroll progress indicator
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        progressBar.style.width = scrollPercent + '%';
+      }
+    };
+
+    // Update scroll progress on scroll
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // Active section highlighting for navigation
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksArray = Array.from(navLinks);
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    const highlightActiveSection = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      sections.forEach(section => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          // Highlight main navigation links
+          navLinksArray.forEach(link => {
+            link.classList.remove('text-primary', 'font-semibold');
+            link.classList.add('text-base-content/80');
+          });
+
+          const activeLink = navLinksArray.find(link =>
+            link.getAttribute('href') === `#${sectionId}`
+          );
+          if (activeLink) {
+            activeLink.classList.remove('text-base-content/80');
+            activeLink.classList.add('text-primary', 'font-semibold');
+          }
+
+          // Highlight side navigation dots
+          navDots.forEach(dot => {
+            dot.classList.remove('bg-primary', 'scale-125');
+            dot.classList.add('bg-base-300');
+          });
+
+          const activeDot = document.querySelector(`.nav-dot[data-section="${sectionId}"]`);
+          if (activeDot) {
+            activeDot.classList.remove('bg-base-300');
+            activeDot.classList.add('bg-primary', 'scale-125');
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', highlightActiveSection);
+
+    // Smooth scrolling for side navigation dots
+    navDots.forEach(dot => {
+      dot.addEventListener('click', function (e: Event) {
+        e.preventDefault();
+        const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href')?.substring(1);
+        const targetSection = targetId ? document.getElementById(targetId) : null;
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Parallax effect for floating elements
+    const floatingElements = document.querySelectorAll('[class*="animate-float"], [class*="animate-pulse"]');
+
+    const updateParallax = () => {
+      const scrolled = window.scrollY;
+      floatingElements.forEach((element, index) => {
+        const speed = 0.5 + (index * 0.1);
+        const yPos = -(scrolled * speed);
+        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
+      });
+    };
+
+    window.addEventListener('scroll', updateParallax);
+
+    // Show/hide scroll indicator based on scroll position
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        scrollIndicator?.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        scrollIndicator?.classList.remove('opacity-0', 'pointer-events-none');
+      }
     });
   });
 </script>
