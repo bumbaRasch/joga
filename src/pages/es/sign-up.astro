@@ -18,6 +18,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
 ---
 
 <Layout title={t('signup.title')} description={t('signup.description')}>
+  <body data-dashboard-url={dashboardUrl}>
   <section id="signup" class="min-h-screen py-20 px-4">
     <div class="container mx-auto max-w-6xl">
       <div class="text-center mb-16">
@@ -187,6 +188,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
       </div>
     </div>
   </section>
+  </body>
 </Layout>
 
 <script>
