@@ -270,3 +270,38 @@ const t = (key: string, values: Record<string, string> = {}) => {
   </div>
 </section>
 
+<script>
+  // Pricing toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const monthlyBtn = document.getElementById('monthly-btn');
+    const annualBtn = document.getElementById('annual-btn');
+    const monthlyPrices = document.querySelectorAll('.monthly-price');
+    const annualPrices = document.querySelectorAll('.annual-price');
+
+    function setMonthlyBilling() {
+      monthlyBtn.classList.add('btn-primary');
+      monthlyBtn.classList.remove('btn-ghost');
+      annualBtn.classList.remove('btn-primary');
+      annualBtn.classList.add('btn-ghost');
+
+      monthlyPrices.forEach(price => price.classList.remove('hidden'));
+      annualPrices.forEach(price => price.classList.add('hidden'));
+    }
+
+    function setAnnualBilling() {
+      annualBtn.classList.add('btn-primary');
+      annualBtn.classList.remove('btn-ghost');
+      monthlyBtn.classList.remove('btn-primary');
+      monthlyBtn.classList.add('btn-ghost');
+
+      annualPrices.forEach(price => price.classList.remove('hidden'));
+      monthlyPrices.forEach(price => price.classList.add('hidden'));
+    }
+
+    monthlyBtn.addEventListener('click', setMonthlyBilling);
+    annualBtn.addEventListener('click', setAnnualBilling);
+
+    // Set initial state to monthly
+    setMonthlyBilling();
+  });
+</script>
