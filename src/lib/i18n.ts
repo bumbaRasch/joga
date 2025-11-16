@@ -202,6 +202,7 @@ export interface Translation {
     annual: string;
     save: string;
     saveWithAnnual: string;
+    popular: string;
     mostPopular: string;
     plans: {
       free: string;
@@ -232,6 +233,9 @@ export interface Translation {
       mobileAccess: string;
       liveClasses: string;
       aiRecommendations: string;
+      everythingInFree: string;
+      everythingInPro: string;
+      personalizedCoach: string;
       advancedAnalytics: string;
       downloadable: string;
       prioritySupport: string;
@@ -453,6 +457,26 @@ export interface Translation {
       system: string;
     };
   };
+
+  // Sign up page
+  signup: {
+    title: string;
+    description: string;
+    createAccount: string;
+    month: string;
+    form: {
+      name: string;
+      namePlaceholder: string;
+      email: string;
+      emailPlaceholder: string;
+      password: string;
+      passwordPlaceholder: string;
+      plan: string;
+      agreeToTerms: string;
+      createAccount: string;
+      back: string;
+    };
+  };
 }
 
 // Translation data for all languages
@@ -647,6 +671,7 @@ const translations: Record<string, Translation> = {
       annual: "Annual (Save 20%)",
       save: "Save",
       saveWithAnnual: "Save ${{amount}} with annual billing",
+      popular: "Popular",
       mostPopular: "MOST POPULAR",
       plans: {
         free: "Free",
@@ -677,6 +702,9 @@ const translations: Record<string, Translation> = {
         mobileAccess: "Mobile app access",
         liveClasses: "Unlimited live classes",
         aiRecommendations: "AI-powered personalization",
+        everythingInFree: "Everything in Free",
+        everythingInPro: "Everything in Pro",
+        personalizedCoach: "Personalized yoga coach",
         advancedAnalytics: "Advanced progress analytics",
         downloadable: "Downloadable content",
         prioritySupport: "Priority support",
@@ -886,6 +914,25 @@ const translations: Record<string, Translation> = {
         system: "System",
       },
     },
+
+    signup: {
+      title: "Start Your Journey",
+      description: "Choose the perfect plan to begin your yoga and wellness journey with AI-powered personalization.",
+      createAccount: "Create Account",
+      month: "month",
+      form: {
+        name: "Full Name",
+        namePlaceholder: "Enter your full name",
+        email: "Email Address",
+        emailPlaceholder: "Enter your email",
+        password: "Password",
+        passwordPlaceholder: "Create a password",
+        plan: "Selected Plan",
+        agreeToTerms: "I agree to the {terms} and {privacy}",
+        createAccount: "Create Account",
+        back: "Back to Pricing"
+      },
+    },
   },
 
   de: {
@@ -1078,6 +1125,7 @@ const translations: Record<string, Translation> = {
       annual: "Jährlich (20% sparen)",
       save: "Sparen",
       saveWithAnnual: "Speichere ${{amount}} mit jährlicher Abrechnung",
+      popular: "Beliebt",
       mostPopular: "AM BELIEBTESTEN",
       plans: {
         free: "Kostenlos",
@@ -1108,6 +1156,9 @@ const translations: Record<string, Translation> = {
         mobileAccess: "Mobile App Zugang",
         liveClasses: "Unbegrenzte Live-Kurse",
         aiRecommendations: "KI-gestützte Personalisierung",
+        everythingInFree: "Alles in Free",
+        everythingInPro: "Alles in Pro",
+        personalizedCoach: "Personalisierter Yoga-Coach",
         advancedAnalytics: "Erweiterte Fortschrittsanalysen",
         downloadable: "Herunterladbare Inhalte",
         prioritySupport: "Prioritäts-Support",
@@ -1317,6 +1368,25 @@ const translations: Record<string, Translation> = {
         system: "System",
       },
     },
+
+    signup: {
+      title: "Starte Deine Reise",
+      description: "Wähle den perfekten Plan, um deine Yoga- und Wellness-Reise mit KI-gestützter Personalisierung zu beginnen.",
+      createAccount: "Konto Erstellen",
+      month: "Monat",
+      form: {
+        name: "Vollständiger Name",
+        namePlaceholder: "Gib deinen vollständigen Namen ein",
+        email: "E-Mail-Adresse",
+        emailPlaceholder: "Gib deine E-Mail ein",
+        password: "Passwort",
+        passwordPlaceholder: "Erstelle ein Passwort",
+        plan: "Ausgewählter Plan",
+        agreeToTerms: "Ich stimme den {terms} und {privacy} zu",
+        createAccount: "Konto Erstellen",
+        back: "Zurück zur Preisübersicht"
+      },
+    },
   },
 
   ru: {
@@ -1509,6 +1579,7 @@ const translations: Record<string, Translation> = {
       annual: "Ежегодно (Экономия 20%)",
       save: "Экономия",
       saveWithAnnual: "Экономия ${{amount}} с годовым выставлением счетов",
+      popular: "Популярный",
       mostPopular: "САМЫЙ ПОПУЛЯРНЫЙ",
       plans: {
         free: "Бесплатно",
@@ -1539,6 +1610,9 @@ const translations: Record<string, Translation> = {
         mobileAccess: "Доступ к мобильному приложению",
         liveClasses: "Безлимитные живые занятия",
         aiRecommendations: "Персонализация на базе ИИ",
+        everythingInFree: "Все в Free",
+        everythingInPro: "Все в Pro",
+        personalizedCoach: "Персонализированный тренер по йоге",
         advancedAnalytics: "Продвинутая аналитика прогресса",
         downloadable: "Загружаемый контент",
         prioritySupport: "Приоритетная поддержка",
@@ -1748,6 +1822,25 @@ const translations: Record<string, Translation> = {
         system: "Системная",
       },
     },
+
+    signup: {
+      title: "Начните Свое Путешествие",
+      description: "Выберите идеальный план, чтобы начать ваше путешествие по йоге и оздоровлению с персонализацией на базе ИИ.",
+      createAccount: "Создать Аккаунт",
+      month: "месяц",
+      form: {
+        name: "Полное Имя",
+        namePlaceholder: "Введите ваше полное имя",
+        email: "Адрес Электронной Почты",
+        emailPlaceholder: "Введите ваш email",
+        password: "Пароль",
+        passwordPlaceholder: "Создайте пароль",
+        plan: "Выбранный План",
+        agreeToTerms: "Я согласен с {terms} и {privacy}",
+        createAccount: "Создать Аккаунт",
+        back: "Назад к Ценам"
+      },
+    },
   },
 
   tr: {
@@ -1940,6 +2033,7 @@ const translations: Record<string, Translation> = {
       annual: "Yıllık (%20 İndirim)",
       save: "Tasarruf",
       saveWithAnnual: "Yıllık faturalandırma ile ${{amount}} kazanın",
+      popular: "Popüler",
       mostPopular: "EN POPÜLER",
       plans: {
         free: "Ücretsiz",
@@ -1970,6 +2064,9 @@ const translations: Record<string, Translation> = {
         mobileAccess: "Mobil uygulama erişimi",
         liveClasses: "Sınırsız canlı dersler",
         aiRecommendations: "YZ destekli kişiselleştirme",
+        everythingInFree: "Free'deki Her Şey",
+        everythingInPro: "Pro'daki Her Şey",
+        personalizedCoach: "Kişiselleştirilmiş yoga koçu",
         advancedAnalytics: "Gelişmiş ilerleme analizi",
         downloadable: "İndirilebilir içerik",
         prioritySupport: "Öncelikli destek",
@@ -2179,6 +2276,25 @@ const translations: Record<string, Translation> = {
         system: "Sistem",
       },
     },
+
+    signup: {
+      title: "Yolculuğunu Başlat",
+      description: "Yapay zeka destekli kişiselleştirme ile yoga ve sağlıklı yaşam yolculuğuna başlamak için mükemmel planı seçin.",
+      createAccount: "Hesap Oluştur",
+      month: "ay",
+      form: {
+        name: "Tam Ad",
+        namePlaceholder: "Tam adınızı girin",
+        email: "E-posta Adresi",
+        emailPlaceholder: "E-postanızı girin",
+        password: "Parola",
+        passwordPlaceholder: "Bir parola oluşturun",
+        plan: "Seçilen Plan",
+        agreeToTerms: "{terms} ve {privacy} kabul ediyorum",
+        createAccount: "Hesap Oluştur",
+        back: "Fiyatlara Geri Dön"
+      },
+    },
   },
 
   es: {
@@ -2371,6 +2487,7 @@ const translations: Record<string, Translation> = {
       annual: "Anual (Ahorra 20%)",
       save: "Ahorra",
       saveWithAnnual: "Ahorra ${{amount}} con facturación anual",
+      popular: "Popular",
       mostPopular: "MÁS POPULAR",
       plans: {
         free: "Gratis",
@@ -2401,6 +2518,9 @@ const translations: Record<string, Translation> = {
         mobileAccess: "Acceso a aplicación móvil",
         liveClasses: "Clases en vivo ilimitadas",
         aiRecommendations: "Personalización con IA",
+        everythingInFree: "Todo en Free",
+        everythingInPro: "Todo en Pro",
+        personalizedCoach: "Entrenador de yoga personalizado",
         advancedAnalytics: "Análisis avanzado de progreso",
         downloadable: "Contenido descargable",
         prioritySupport: "Soporte prioritario",
@@ -2608,6 +2728,25 @@ const translations: Record<string, Translation> = {
         light: "Claro",
         dark: "Oscuro",
         system: "Sistema",
+      },
+    },
+
+    signup: {
+      title: "Comienza Tu Viaje",
+      description: "Elige el plan perfecto para comenzar tu viaje de yoga y bienestar con personalización de IA.",
+      createAccount: "Crear Cuenta",
+      month: "mes",
+      form: {
+        name: "Nombre Completo",
+        namePlaceholder: "Ingresa tu nombre completo",
+        email: "Correo Electrónico",
+        emailPlaceholder: "Ingresa tu correo",
+        password: "Contraseña",
+        passwordPlaceholder: "Crea una contraseña",
+        plan: "Plan Seleccionado",
+        agreeToTerms: "Acepto los {terms} y {privacy}",
+        createAccount: "Crear Cuenta",
+        back: "Volver a Precios"
       },
     },
   },
