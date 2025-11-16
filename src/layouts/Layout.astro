@@ -1,6 +1,7 @@
 ---
 import "../assets/app.css";
 import { getTranslation, getTranslations } from '../lib/i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
 // Props for SEO meta tags
 export interface Props {
@@ -33,6 +34,13 @@ const defaultDescriptions: Record<'en' | 'de' | 'ru' | 'tr' | 'es', string> = {
 const localizedTitle = title || defaultTitles[currentLocale] || defaultTitles.en;
 const localizedDescription = description || defaultDescriptions[currentLocale] || defaultDescriptions.en;
 
+// Get localized URLs for SEO
+const enUrl = getRelativeLocaleUrl('en');
+const deUrl = getRelativeLocaleUrl('de');
+const ruUrl = getRelativeLocaleUrl('ru');
+const trUrl = getRelativeLocaleUrl('tr');
+const esUrl = getRelativeLocaleUrl('es');
+
 // Helper function to get translation with dynamic values
 const t = (key: string, values: Record<string, string> = {}) => {
   let translation = getTranslation(Astro, key);
@@ -52,20 +60,20 @@ const t = (key: string, values: Record<string, string> = {}) => {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- Favicon with proper fallbacks -->
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="icon" type="image/x-icon" href={new URL("/favicon.ico", Astro.site)} />
+		<link rel="icon" type="image/png" sizes="32x32" href={new URL("/favicon-32x32.png", Astro.site)} />
+		<link rel="icon" type="image/png" sizes="16x16" href={new URL("/favicon-16x16.png", Astro.site)} />
+		<link rel="apple-touch-icon" sizes="180x180" href={new URL("/apple-touch-icon.png", Astro.site)} />
+		<link rel="manifest" href={new URL("/site.webmanifest", Astro.site)} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Alternate language links for SEO -->
-		<link rel="alternate" hreflang="en" href="https://joga.com/" />
-		<link rel="alternate" hreflang="de" href="https://joga.com/de/" />
-		<link rel="alternate" hreflang="ru" href="https://joga.com/ru/" />
-		<link rel="alternate" hreflang="tr" href="https://joga.com/tr/" />
-		<link rel="alternate" hreflang="es" href="https://joga.com/es/" />
-		<link rel="alternate" hreflang="x-default" href="https://joga.com/" />
+		<link rel="alternate" hreflang="en" href={new URL(enUrl, Astro.site)} />
+		<link rel="alternate" hreflang="de" href={new URL(deUrl, Astro.site)} />
+		<link rel="alternate" hreflang="ru" href={new URL(ruUrl, Astro.site)} />
+		<link rel="alternate" hreflang="tr" href={new URL(trUrl, Astro.site)} />
+		<link rel="alternate" hreflang="es" href={new URL(esUrl, Astro.site)} />
+		<link rel="alternate" hreflang="x-default" href={new URL(enUrl, Astro.site)} />
 
 		<!-- Primary Meta Tags -->
 		<title>{localizedTitle}</title>

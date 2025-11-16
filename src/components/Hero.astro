@@ -4,6 +4,10 @@ import ThemeToggle from './ThemeToggle.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import VideoModal from './VideoModal.astro';
 import { getTranslation } from '../lib/i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// Get current locale
+const currentLocale = Astro.currentLocale || 'en';
 
 // Helper function to get translation with dynamic values
 const t = (key: string, values: Record<string, string> = {}) => {
@@ -16,6 +20,9 @@ const t = (key: string, values: Record<string, string> = {}) => {
 
   return translation;
 };
+
+// Get localized sign-up URL
+const signUpUrl = getRelativeLocaleUrl(currentLocale, 'sign-up');
 ---
 
 <!-- Hero Section with Dark/Light Theme Support -->
@@ -59,7 +66,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
           <div class="flex items-center gap-2">
             <LanguageSwitcher />
             <ThemeToggle />
-            <a href="/sign-up/" class="btn btn-primary">{t('nav.getStarted')}</a>
+            <a href={signUpUrl} class="btn btn-primary">{t('nav.getStarted')}</a>
           </div>
         </div>
       </div>
@@ -71,7 +78,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
           <a href="#features" class="link link-hover text-base-content/80">{t('nav.features')}</a>
           <a href="#pricing" class="link link-hover text-base-content/80">{t('nav.pricing')}</a>
           <a href="#testimonials" class="link link-hover text-base-content/80">{t('nav.testimonials')}</a>
-          <a href="/sign-up/" class="btn btn-primary w-full">{t('nav.getStarted')}</a>
+          <a href={signUpUrl} class="btn btn-primary w-full">{t('nav.getStarted')}</a>
         </div>
       </div>
     </div>
@@ -140,7 +147,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
 
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-        <a href="/sign-up/" class="btn btn-primary btn-lg min-w-[200px]">
+        <a href={signUpUrl} class="btn btn-primary btn-lg min-w-[200px]">
           {t('hero.ctaPrimary')}
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

@@ -11,7 +11,7 @@ const languageOptions = supportedLocales.map(locale => {
     code: locale,
     name: info.name,
     flag: info.flag,
-    url: locale === 'en' ? '/' : `/${locale}/`,
+    url: getRelativeLocaleUrl(locale),
   };
 });
 ---

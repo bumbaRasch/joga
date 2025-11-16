@@ -1,6 +1,9 @@
 ---
 // Final Call-to-Action Section with contact form
 import { getTranslation } from '../lib/i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const currentLocale = Astro.currentLocale || 'en';
 
 const t = (key: string, values: Record<string, string> = {}) => {
   let translation = getTranslation(Astro, key);
@@ -9,6 +12,12 @@ const t = (key: string, values: Record<string, string> = {}) => {
   });
   return translation;
 };
+
+// Get localized URLs for legal pages
+const termsUrl = getRelativeLocaleUrl(currentLocale, 'terms-of-service');
+const privacyUrl = getRelativeLocaleUrl(currentLocale, 'privacy-policy');
+const careersUrl = getRelativeLocaleUrl(currentLocale, 'careers');
+const pressKitUrl = getRelativeLocaleUrl(currentLocale, 'press-kit');
 ---
 
 <section class="py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 theme-transition">
@@ -110,8 +119,8 @@ const t = (key: string, values: Record<string, string> = {}) => {
               <label class="cursor-pointer">
                 <input type="checkbox" class="checkbox checkbox-primary mr-2" required />
                 <span class="label-text" set:html={t('cta.termsAgree', {
-                  terms: '<a href="/terms-of-service" class="link link-primary">Terms of Service</a>',
-                  privacy: '<a href="/privacy-policy" class="link link-primary">Privacy Policy</a>'
+                  terms: `<a href="${termsUrl}" class="link link-primary">Terms of Service</a>`,
+                  privacy: `<a href="${privacyUrl}" class="link link-primary">Privacy Policy</a>`
                 })}></span>
               </label>
             </div>
@@ -158,8 +167,8 @@ const t = (key: string, values: Record<string, string> = {}) => {
   <div class="grid grid-flow-col gap-4">
     <a href="#features" class="link link-hover">{t('footer.about')}</a>
     <a href="#cta-form" class="link link-hover">{t('footer.contact')}</a>
-    <a href="/careers" class="link link-hover">{t('footer.careers')}</a>
-    <a href="/press-kit" class="link link-hover">{t('footer.pressKit')}</a>
+    <a href={careersUrl} class="link link-hover">{t('footer.careers')}</a>
+    <a href={pressKitUrl} class="link link-hover">{t('footer.pressKit')}</a>
   </div>
   <div>
     <div class="grid grid-flow-col gap-4">
