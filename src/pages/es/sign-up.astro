@@ -2,6 +2,10 @@
 // Spanish sign up page with pricing and registration options
 import Layout from '../../layouts/Layout.astro';
 import { getTranslation } from '../../lib/i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const currentLocale = 'es';
+const dashboardUrl = getRelativeLocaleUrl(currentLocale, 'dashboard');
 
 // Helper function to get translation with dynamic values
 const t = (key: string, values: Record<string, string> = {}) => {
@@ -213,7 +217,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
     localStorage.setItem('selectedPlan', plan);
 
     // Navigate to dashboard
-    window.location.href = '/dashboard';
+    window.location.href = '{dashboardUrl}';
   };
 
   window.backToPricing = function() {

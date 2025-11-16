@@ -18,6 +18,6 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/joga/",
-  "start_url": "/joga/"
+  "scope": "/",
+  "start_url": "/"
 }
