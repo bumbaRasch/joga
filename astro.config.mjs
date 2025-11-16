@@ -15,7 +15,7 @@ export default defineConfig({
     },
     output: "static",
     // GitHub Pages configuration
-    site: "https://bumbarasch.github.io",
-    // Use base path only in production
+    site: "https://bumbarasch.github.io/joga",
+    // Use base path only in production for development convenience
     base: import.meta.env.PROD ? "/joga" : "/",
 });

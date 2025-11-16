@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const currentLocale = Astro.currentLocale || 'en';
+const contactUrl = getRelativeLocaleUrl(currentLocale, 'careers'); // Using careers as contact page
 ---
 
 <Layout title="Terms of Service - Joga" description="Terms of Service for Joga yoga and wellness platform">
@@ -214,7 +218,7 @@ import Layout from '../layouts/Layout.astro';
               <ul class="space-y-2">
                 <li><strong>Email:</strong> <a href="mailto:legal@joga.com" class="link link-primary">legal@joga.com</a></li>
                 <li><strong>Support:</strong> <a href="mailto:support@joga.com" class="link link-primary">support@joga.com</a></li>
-                <li><strong>Website:</strong> <a href="https://joga.com/contact" class="link link-primary">joga.com/contact</a></li>
+                <li><strong>Website:</strong> <a href={contactUrl} class="link link-primary">Contact Page</a></li>
               </ul>
             </div>
           </div>
