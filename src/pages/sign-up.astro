@@ -111,7 +111,7 @@ const isDefaultLocale = lang === 'en';
               </li>
             </ul>
             <div class="card-actions justify-end">
-              <button class="btn btn-secondary btn-block" onclick="selectPlan('pro')">
+              <button class="btn btn-secondary btn-block" onclick="startFreeTrial('pro')">
                 {t('pricing.buttons.startFreeTrial')}
               </button>
             </div>
@@ -148,7 +148,7 @@ const isDefaultLocale = lang === 'en';
               </li>
             </ul>
             <div class="card-actions justify-end">
-              <button class="btn btn-primary btn-block" onclick="selectPlan('premium')">
+              <button class="btn btn-primary btn-block" onclick="startFreeTrial('premium')">
                 {t('pricing.buttons.startFreeTrial')}
               </button>
             </div>
@@ -217,6 +217,7 @@ const isDefaultLocale = lang === 'en';
   declare global {
     interface Window {
       selectPlan: (plan: string) => void;
+      startFreeTrial: (plan: string) => void;
       backToPricing: () => void;
       handleSignup: (event: Event) => void;
     }
@@ -239,6 +240,15 @@ const isDefaultLocale = lang === 'en';
 
     // Scroll to form
     signupForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Start free trial - navigate to dashboard
+  window.startFreeTrial = function(plan: string) {
+    // Store selected plan for future use
+    localStorage.setItem('selectedPlan', plan);
+
+    // Navigate to dashboard
+    window.location.href = '/dashboard';
   };
 
   // Back to pricing functionality

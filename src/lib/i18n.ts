@@ -477,6 +477,67 @@ export interface Translation {
       back: string;
     };
   };
+
+  // Dashboard page
+  dashboard: {
+    title: string;
+    welcome: string;
+    subtitle: string;
+    navigation: {
+      overview: string;
+      classes: string;
+      progress: string;
+      meditation: string;
+      community: string;
+      settings: string;
+    };
+    stats: {
+      weeklyStreak: string;
+      totalSessions: string;
+      minutesPracticed: string;
+      skillLevel: string;
+      nextGoal: string;
+    };
+    upcomingClasses: {
+      title: string;
+      seeAll: string;
+      joinLive: string;
+      startsIn: string;
+      startingSoon: string;
+    };
+    recommendedClasses: {
+      title: string;
+      basedOn: string;
+      startNow: string;
+      duration: string;
+      level: string;
+    };
+    quickActions: {
+      startPractice: string;
+      scheduleClass: string;
+      viewProgress: string;
+      joinCommunity: string;
+    };
+    achievements: {
+      title: string;
+      newBadge: string;
+      viewAll: string;
+      locked: string;
+    };
+    meditation: {
+      title: string;
+      quickSession: string;
+      breathing: string;
+      mindfulness: string;
+      start: string;
+    };
+    community: {
+      title: string;
+      activeMembers: string;
+      recentActivity: string;
+      joinDiscussion: string;
+    };
+  };
 }
 
 // Translation data for all languages
@@ -933,6 +994,66 @@ const translations: Record<string, Translation> = {
         back: "Back to Pricing"
       },
     },
+
+    dashboard: {
+      title: "Your Dashboard",
+      welcome: "Welcome back",
+      subtitle: "Continue your wellness journey",
+      navigation: {
+        overview: "Overview",
+        classes: "Classes",
+        progress: "Progress",
+        meditation: "Meditation",
+        community: "Community",
+        settings: "Settings"
+      },
+      stats: {
+        weeklyStreak: "Weekly Streak",
+        totalSessions: "Total Sessions",
+        minutesPracticed: "Minutes Practiced",
+        skillLevel: "Skill Level",
+        nextGoal: "Next Goal"
+      },
+      upcomingClasses: {
+        title: "Upcoming Classes",
+        seeAll: "See All",
+        joinLive: "Join Live",
+        startsIn: "Starts in",
+        startingSoon: "Starting Soon"
+      },
+      recommendedClasses: {
+        title: "Recommended for You",
+        basedOn: "Based on your progress",
+        startNow: "Start Now",
+        duration: "Duration",
+        level: "Level"
+      },
+      quickActions: {
+        startPractice: "Start Practice",
+        scheduleClass: "Schedule Class",
+        viewProgress: "View Progress",
+        joinCommunity: "Join Community"
+      },
+      achievements: {
+        title: "Recent Achievements",
+        newBadge: "New Badge Earned!",
+        viewAll: "View All",
+        locked: "Locked"
+      },
+      meditation: {
+        title: "Quick Meditation",
+        quickSession: "Quick Session",
+        breathing: "Breathing Exercise",
+        mindfulness: "Mindfulness",
+        start: "Start"
+      },
+      community: {
+        title: "Community Activity",
+        activeMembers: "Active Members",
+        recentActivity: "Recent Activity",
+        joinDiscussion: "Join Discussion"
+      }
+    },
   },
 
   de: {
@@ -1386,6 +1507,66 @@ const translations: Record<string, Translation> = {
         createAccount: "Konto Erstellen",
         back: "Zurück zur Preisübersicht"
       },
+    },
+
+    dashboard: {
+      title: "Dein Dashboard",
+      welcome: "Willkommen zurück",
+      subtitle: "Setze deine Wellness-Reise fort",
+      navigation: {
+        overview: "Übersicht",
+        classes: "Kurse",
+        progress: "Fortschritt",
+        meditation: "Meditation",
+        community: "Community",
+        settings: "Einstellungen"
+      },
+      stats: {
+        weeklyStreak: "Wöchentliche Serie",
+        totalSessions: "Gesamtsitzungen",
+        minutesPracticed: "Minuten Geübt",
+        skillLevel: "Kenntnisstand",
+        nextGoal: "Nächstes Ziel"
+      },
+      upcomingClasses: {
+        title: "Bevorstehende Kurse",
+        seeAll: "Alle Ansehen",
+        joinLive: "Live Beitreten",
+        startsIn: "Beginnt in",
+        startingSoon: "Beginnt Bald"
+      },
+      recommendedClasses: {
+        title: "Empfohlen für Dich",
+        basedOn: "Basierend auf deinem Fortschritt",
+        startNow: "Jetzt Starten",
+        duration: "Dauer",
+        level: "Level"
+      },
+      quickActions: {
+        startPractice: "Praxis Starten",
+        scheduleClass: "Kurs Planen",
+        viewProgress: "Fortschritt Ansehen",
+        joinCommunity: "Community Beitreten"
+      },
+      achievements: {
+        title: "Aktuelle Erfolge",
+        newBadge: "Neues Abzeichen Verdient!",
+        viewAll: "Alle Ansehen",
+        locked: "Gesperrt"
+      },
+      meditation: {
+        title: "Schnelle Meditation",
+        quickSession: "Schnelle Sitzung",
+        breathing: "Atemübung",
+        mindfulness: "Achtsamkeit",
+        start: "Starten"
+      },
+      community: {
+        title: "Community-Aktivität",
+        activeMembers: "Aktive Mitglieder",
+        recentActivity: "Aktuelle Aktivität",
+        joinDiscussion: "Diskussion Beitreten"
+      }
     },
   },
 
@@ -1841,6 +2022,66 @@ const translations: Record<string, Translation> = {
         back: "Назад к Ценам"
       },
     },
+
+    dashboard: {
+      title: "Ваша Панель Управления",
+      welcome: "Добро пожаловать",
+      subtitle: "Продолжайте свое путешествие к благополучию",
+      navigation: {
+        overview: "Обзор",
+        classes: "Занятия",
+        progress: "Прогресс",
+        meditation: "Медитация",
+        community: "Сообщество",
+        settings: "Настройки"
+      },
+      stats: {
+        weeklyStreak: "Недельная Серия",
+        totalSessions: "Всего Сессий",
+        minutesPracticed: "Минут Практиковано",
+        skillLevel: "Уровень Навыков",
+        nextGoal: "Следующая Цель"
+      },
+      upcomingClasses: {
+        title: "Предстоящие Занятия",
+        seeAll: "Посмотреть Все",
+        joinLive: "Присоединиться к Трансляции",
+        startsIn: "Начинается через",
+        startingSoon: "Скоро Начнется"
+      },
+      recommendedClasses: {
+        title: "Рекомендовано для Вас",
+        basedOn: "Основано на вашем прогрессе",
+        startNow: "Начать Сейчас",
+        duration: "Продолжительность",
+        level: "Уровень"
+      },
+      quickActions: {
+        startPractice: "Начать Практику",
+        scheduleClass: "Запланировать Занятие",
+        viewProgress: "Посмотреть Прогресс",
+        joinCommunity: "Присоединиться к Сообществу"
+      },
+      achievements: {
+        title: "Последние Достижения",
+        newBadge: "Получен Новый Значок!",
+        viewAll: "Посмотреть Все",
+        locked: "Заблокировано"
+      },
+      meditation: {
+        title: "Быстрая Медитация",
+        quickSession: "Быстрая Сессия",
+        breathing: "Дыхательное Упражнение",
+        mindfulness: "Осознанность",
+        start: "Начать"
+      },
+      community: {
+        title: "Активность Сообщества",
+        activeMembers: "Активные Участники",
+        recentActivity: "Последняя Активность",
+        joinDiscussion: "Присоединиться к Обсуждению"
+      }
+    },
   },
 
   tr: {
@@ -2295,6 +2536,66 @@ const translations: Record<string, Translation> = {
         back: "Fiyatlara Geri Dön"
       },
     },
+
+    dashboard: {
+      title: "Panelin",
+      welcome: "Tekrar hoş geldin",
+      subtitle: "Wellness yolculuğuna devam et",
+      navigation: {
+        overview: "Genel Bakış",
+        classes: "Dersler",
+        progress: "İlerleme",
+        meditation: "Meditasyon",
+        community: "Topluluk",
+        settings: "Ayarlar"
+      },
+      stats: {
+        weeklyStreak: "Haftalık Seri",
+        totalSessions: "Toplam Oturum",
+        minutesPracticed: "Pratik Yapılan Dakika",
+        skillLevel: "Beceri Seviyesi",
+        nextGoal: "Sıradaki Hedef"
+      },
+      upcomingClasses: {
+        title: "Yaklaşan Dersler",
+        seeAll: "Tümünü Gör",
+        joinLive: "Canlı Katıl",
+        startsIn: "Başlıyor",
+        startingSoon: "Yakında Başlıyor"
+      },
+      recommendedClasses: {
+        title: "Sana Özel",
+        basedOn: "İlerlemene göre",
+        startNow: "Şimdi Başla",
+        duration: "Süre",
+        level: "Seviye"
+      },
+      quickActions: {
+        startPractice: "Pratik Başlat",
+        scheduleClass: "Ders Planla",
+        viewProgress: "İlerlemeyi Gör",
+        joinCommunity: "Topluluğa Katıl"
+      },
+      achievements: {
+        title: "Son Başarılar",
+        newBadge: "Yeni Rozet Kazanıldı!",
+        viewAll: "Tümünü Gör",
+        locked: "Kilitli"
+      },
+      meditation: {
+        title: "Hızlı Meditasyon",
+        quickSession: "Hızlı Oturum",
+        breathing: "Nefes Egzersizi",
+        mindfulness: "Farkındalık",
+        start: "Başla"
+      },
+      community: {
+        title: "Topluluk Aktivitesi",
+        activeMembers: "Aktif Üyeler",
+        recentActivity: "Son Aktivite",
+        joinDiscussion: "Tartışmaya Katıl"
+      }
+    },
   },
 
   es: {
@@ -2748,6 +3049,66 @@ const translations: Record<string, Translation> = {
         createAccount: "Crear Cuenta",
         back: "Volver a Precios"
       },
+    },
+
+    dashboard: {
+      title: "Tu Panel",
+      welcome: "Bienvenido de vuelta",
+      subtitle: "Continúa tu viaje de bienestar",
+      navigation: {
+        overview: "Resumen",
+        classes: "Clases",
+        progress: "Progreso",
+        meditation: "Meditación",
+        community: "Comunidad",
+        settings: "Configuración"
+      },
+      stats: {
+        weeklyStreak: "Racha Semanal",
+        totalSessions: "Sesiones Totales",
+        minutesPracticed: "Minutos Practicados",
+        skillLevel: "Nivel de Habilidad",
+        nextGoal: "Siguiente Objetivo"
+      },
+      upcomingClasses: {
+        title: "Próximas Clases",
+        seeAll: "Ver Todas",
+        joinLive: "Unirse en Vivo",
+        startsIn: "Comienza en",
+        startingSoon: "Comienza Pronto"
+      },
+      recommendedClasses: {
+        title: "Recomendado para Ti",
+        basedOn: "Basado en tu progreso",
+        startNow: "Comenzar Ahora",
+        duration: "Duración",
+        level: "Nivel"
+      },
+      quickActions: {
+        startPractice: "Comenzar Práctica",
+        scheduleClass: "Programar Clase",
+        viewProgress: "Ver Progreso",
+        joinCommunity: "Unirse a la Comunidad"
+      },
+      achievements: {
+        title: "Logros Recientes",
+        newBadge: "¡Nueva Insignia Ganada!",
+        viewAll: "Ver Todas",
+        locked: "Bloqueado"
+      },
+      meditation: {
+        title: "Meditación Rápida",
+        quickSession: "Sesión Rápida",
+        breathing: "Ejercicio de Respiración",
+        mindfulness: "Atención Plena",
+        start: "Comenzar"
+      },
+      community: {
+        title: "Actividad de la Comunidad",
+        activeMembers: "Miembros Activos",
+        recentActivity: "Actividad Reciente",
+        joinDiscussion: "Unirse a la Discusión"
+      }
     },
   },
 };
