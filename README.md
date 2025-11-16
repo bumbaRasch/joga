@@ -70,7 +70,12 @@ Perfect for yoga enthusiasts, fitness professionals, and anyone looking to trans
 
 Experience Joga in action:
 - **Live Site**: [https://bumbarasch.github.io/joga](https://bumbarasch.github.io/joga) (GitHub Pages)
-- **Development Preview**: Running on `localhost:4321`
+  - ✅ **English**: [https://bumbarasch.github.io/joga](https://bumbarasch.github.io/joga)
+  - ✅ **Deutsch**: [https://bumbarasch.github.io/joga/de](https://bumbarasch.github.io/joga/de)
+  - ✅ **Русский**: [https://bumbarasch.github.io/joga/ru](https://bumbarasch.github.io/joga/ru)
+  - ✅ **Türkçe**: [https://bumbarasch.github.io/joga/tr](https://bumbarasch.github.io/joga/tr)
+  - ✅ **Español**: [https://bumbarasch.github.io/joga/es](https://bumbarasch.github.io/joga/es)
+- **Development Preview**: Running on `localhost:4322`
 - **Deployment Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions
 
 ### Screenshots
