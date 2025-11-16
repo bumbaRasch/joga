@@ -252,7 +252,7 @@ const isDefaultLocale = lang === 'en';
     localStorage.setItem('selectedPlan', plan);
 
     // Navigate to dashboard
-    window.location.href = '{dashboardUrl}';
+    window.location.href = document.body.dataset.dashboardUrl || '/dashboard';
   };
 
   // Back to pricing functionality

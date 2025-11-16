@@ -22,6 +22,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
 
 <Layout title={t('signup.title')} description={t('signup.description')}>
   <!-- Sign Up Section -->
+  <body data-dashboard-url={dashboardUrl}>
   <section id="signup" class="min-h-screen py-20 px-4">
     <div class="container mx-auto max-w-6xl">
       <!-- Header -->
@@ -211,6 +212,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
       </div>
     </div>
   </section>
+  </body>
 </Layout>
 
 <script>
@@ -248,7 +250,7 @@ const t = (key: string, values: Record<string, string> = {}) => {
     localStorage.setItem('selectedPlan', plan);
 
     // Navigate to dashboard
-    window.location.href = '{dashboardUrl}';
+    window.location.href = document.body.dataset.dashboardUrl || '/ru/dashboard';
   };
 
   // Back to pricing functionality
