@@ -1,0 +1,349 @@
+---
+// Spanish dashboard page with yoga progress, classes, meditation, and community features
+import Layout from '../../layouts/Layout.astro';
+import { getTranslation } from '../../lib/i18n';
+
+// Helper function to get translation with dynamic values
+const t = (key: string, values: Record<string, string> = {}) => {
+  let translation = getTranslation(Astro, key);
+  Object.entries(values).forEach(([placeholder, value]) => {
+    translation = translation.replace(`{${placeholder}}`, value);
+  });
+  return translation;
+};
+
+// Simulated user data (in real app, this would come from backend/database)
+const userName = "Alex";
+const userStats = {
+  weeklyStreak: 5,
+  totalSessions: 47,
+  minutesPracticed: 1250,
+  skillLevel: "Intermedio",
+  nextGoal: "Flujo Avanzado"
+};
+
+const upcomingClasses = [
+  {
+    id: 1,
+    title: "Flujo Matutino",
+    instructor: "Sarah Chen",
+    time: "08:00",
+    duration: "45 min",
+    level: "Todos los niveles",
+    live: true,
+    startsIn: "2 horas"
+  },
+  {
+    id: 2,
+    title: "Power Yoga",
+    instructor: "Mike Johnson",
+    time: "12:00",
+    duration: "60 min",
+    level: "Intermedio",
+    live: true,
+    startsIn: "6 horas"
+  }
+];
+
+const recommendedClasses = [
+  {
+    id: 1,
+    title: "Yoga para Reducir Estrés",
+    duration: "30 min",
+    level: "Principiante",
+    focus: "Relajación",
+    progress: 75
+  },
+  {
+    id: 2,
+    title: "Fuerza Core",
+    duration: "45 min",
+    level: "Intermedio",
+    focus: "Construcción de fuerza",
+    progress: 30
+  }
+];
+
+const achievements = [
+  {
+    id: 1,
+    title: "Guerrero Semanal",
+    description: "Serie de ejercicios de 7 días",
+    icon: "🔥",
+    unlocked: true,
+    date: "hace 2 días"
+  },
+  {
+    id: 2,
+    title: "Maestro de Flexibilidad",
+    description: "20 sesiones de flexibilidad completadas",
+    icon: "🧘‍♀️",
+    unlocked: false,
+    progress: 18
+  },
+  {
+    id: 3,
+    title: "Gurú de la Atención Plena",
+    description: "10 sesiones de meditación completadas",
+    icon: "🕉️",
+    unlocked: true,
+    date: "hace 1 semana"
+  }
+];
+---
+
+<Layout title={t('dashboard.title')} description={t('dashboard.subtitle')}>
+  <div class="min-h-screen bg-base-200">
+    <!-- Dashboard Header -->
+    <header class="bg-base-100 shadow-sm border-b border-base-300">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold">{t('dashboard.welcome')}, {userName}!</h1>
+            <p class="text-base-content/70">{t('dashboard.subtitle')}</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <button class="btn btn-primary btn-sm">
+              {t('dashboard.quickActions.startPractice')}
+            </button>
+            <div class="avatar">
+              <div class="w-10 rounded-full bg-primary text-primary-content flex items-center justify-center">
+                {userName.charAt(0)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="bg-base-100 border-b border-base-300 sticky top-0 z-10">
+      <div class="container mx-auto px-4">
+        <div class="flex gap-6 overflow-x-auto">
+          <button class="py-3 px-1 border-b-2 border-primary text-primary font-medium whitespace-nowrap">
+            {t('dashboard.navigation.overview')}
+          </button>
+          <button class="py-3 px-1 border-b-2 border-transparent text-base-content/70 hover:text-base-content whitespace-nowrap">
+            {t('dashboard.navigation.classes')}
+          </button>
+          <button class="py-3 px-1 border-b-2 border-transparent text-base-content/70 hover:text-base-content whitespace-nowrap">
+            {t('dashboard.navigation.progress')}
+          </button>
+          <button class="py-3 px-1 border-b-2 border-transparent text-base-content/70 hover:text-base-content whitespace-nowrap">
+            {t('dashboard.navigation.meditation')}
+          </button>
+          <button class="py-3 px-1 border-b-2 border-transparent text-base-content/70 hover:text-base-content whitespace-nowrap">
+            {t('dashboard.navigation.community')}
+          </button>
+          <button class="py-3 px-1 border-b-2 border-transparent text-base-content/70 hover:text-base-content whitespace-nowrap">
+            {t('dashboard.navigation.settings')}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+      <!-- Stats Grid -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div class="stat bg-base-100 rounded-lg shadow-sm">
+          <div class="stat-figure text-primary">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="stat-title">{t('dashboard.stats.weeklyStreak')}</div>
+          <div class="stat-value text-primary">{userStats.weeklyStreak}</div>
+          <div class="stat-desc">días</div>
+        </div>
+
+        <div class="stat bg-base-100 rounded-lg shadow-sm">
+          <div class="stat-figure text-secondary">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h2a2 2 0 100 4h2a1 1 0 100 2 2 2 0 01-2 2H4a2 2 0 01-2-2V7a2 2 0 012-2z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="stat-title">{t('dashboard.stats.totalSessions')}</div>
+          <div class="stat-value text-secondary">{userStats.totalSessions}</div>
+          <div class="stat-desc">completadas</div>
+        </div>
+
+        <div class="stat bg-base-100 rounded-lg shadow-sm">
+          <div class="stat-figure text-accent">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="stat-title">{t('dashboard.stats.minutesPracticed')}</div>
+          <div class="stat-value text-accent">{userStats.minutesPracticed}</div>
+          <div class="stat-desc">minutos</div>
+        </div>
+
+        <div class="stat bg-base-100 rounded-lg shadow-sm">
+          <div class="stat-figure text-success">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+          </div>
+          <div class="stat-title">{t('dashboard.stats.skillLevel')}</div>
+          <div class="stat-value text-success">{userStats.skillLevel}</div>
+          <div class="stat-desc">nivel actual</div>
+        </div>
+
+        <div class="stat bg-base-100 rounded-lg shadow-sm">
+          <div class="stat-figure text-warning">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="stat-title">{t('dashboard.stats.nextGoal')}</div>
+          <div class="stat-value text-warning text-sm">{userStats.nextGoal}</div>
+          <div class="stat-desc">¡sigue así!</div>
+        </div>
+      </section>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Upcoming Classes -->
+        <section class="lg:col-span-2">
+          <div class="bg-base-100 rounded-lg shadow-sm p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-bold">{t('dashboard.upcomingClasses.title')}</h2>
+              <button class="btn btn-ghost btn-sm">{t('dashboard.upcomingClasses.seeAll')}</button>
+            </div>
+
+            <div class="space-y-4">
+              {upcomingClasses.map(cls => (
+                <div class="border border-base-300 rounded-lg p-4 hover:border-primary transition-colors">
+                  <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                      <div class="flex items-center gap-2 mb-2">
+                        <h3 class="font-semibold">{cls.title}</h3>
+                        {cls.live && (
+                          <div class="badge badge-primary badge-sm">EN VIVO</div>
+                        )}
+                      </div>
+                      <p class="text-sm text-base-content/70 mb-2">{cls.instructor} • {cls.duration} • {cls.level}</p>
+                      <div class="flex items-center gap-4 text-sm">
+                        <span class="text-base-content/60">{cls.time}</span>
+                        <span class="text-primary font-medium">{t('dashboard.upcomingClasses.startsIn')} {cls.startsIn}</span>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary">
+                      {t('dashboard.upcomingClasses.joinLive')}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Recommended Classes -->
+          <div class="bg-base-100 rounded-lg shadow-sm p-6 mt-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-bold">{t('dashboard.recommendedClasses.title')}</h2>
+              <span class="text-sm text-base-content/60">{t('dashboard.recommendedClasses.basedOn')}</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {recommendedClasses.map(cls => (
+                <div class="border border-base-300 rounded-lg p-4 hover:border-primary transition-colors">
+                  <h3 class="font-semibold mb-2">{cls.title}</h3>
+                  <div class="flex items-center gap-4 text-sm text-base-content/70 mb-3">
+                    <span>{t('dashboard.recommendedClasses.duration')}: {cls.duration}</span>
+                    <span>{t('dashboard.recommendedClasses.level')}: {cls.level}</span>
+                  </div>
+                  <div class="w-full bg-base-200 rounded-full h-2 mb-3">
+                    <div class="bg-primary h-2 rounded-full" style={`width: ${cls.progress}%`}></div>
+                  </div>
+                  <button class="btn btn-outline btn-sm w-full">
+                    {t('dashboard.recommendedClasses.startNow')}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="space-y-6">
+          <!-- Quick Actions -->
+          <div class="bg-base-100 rounded-lg shadow-sm p-6">
+            <h2 class="text-xl font-bold mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-2 gap-2">
+              <button class="btn btn-outline btn-sm">
+                {t('dashboard.quickActions.scheduleClass')}
+              </button>
+              <button class="btn btn-outline btn-sm">
+                {t('dashboard.quickActions.viewProgress')}
+              </button>
+              <button class="btn btn-outline btn-sm col-span-2">
+                {t('dashboard.quickActions.joinCommunity')}
+              </button>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="bg-base-100 rounded-lg shadow-sm p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-bold">{t('dashboard.achievements.title')}</h2>
+              <button class="btn btn-ghost btn-xs">{t('dashboard.achievements.viewAll')}</button>
+            </div>
+
+            <div class="space-y-3">
+              {achievements.map(achievement => (
+                <div class={`flex items-center gap-3 p-2 rounded-lg ${achievement.unlocked ? 'bg-success/10' : 'bg-base-200'}`}>
+                  <div class={`text-2xl ${!achievement.unlocked && 'opacity-30 grayscale'}`}>
+                    {achievement.icon}
+                  </div>
+                  <div class="flex-1">
+                    <h4 class={`font-medium text-sm ${achievement.unlocked ? '' : 'text-base-content/50'}`}>
+                      {achievement.title}
+                    </h4>
+                    <p class="text-xs text-base-content/60">{achievement.description}</p>
+                    {!achievement.unlocked && (
+                      <div class="text-xs text-primary mt-1">{achievement.progress}/20</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Quick Meditation -->
+          <div class="bg-base-100 rounded-lg shadow-sm p-6">
+            <h2 class="text-xl font-bold mb-4">{t('dashboard.meditation.title')}</h2>
+            <div class="space-y-2">
+              <button class="btn btn-outline btn-sm w-full">
+                {t('dashboard.meditation.quickSession')}
+              </button>
+              <button class="btn btn-outline btn-sm w-full">
+                {t('dashboard.meditation.breathing')}
+              </button>
+              <button class="btn btn-outline btn-sm w-full">
+                {t('dashboard.meditation.mindfulness')}
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  // Dashboard interactions
+  document.addEventListener('DOMContentLoaded', () => {
+    // Simulate live countdown
+    const updateCountdowns = () => {
+      const countdowns = document.querySelectorAll('[data-countdown]');
+      countdowns.forEach(element => {
+        // Update countdown logic here
+      });
+    };
+
+    // Update every minute
+    setInterval(updateCountdowns, 60000);
+    updateCountdowns();
+  });
+</script>
