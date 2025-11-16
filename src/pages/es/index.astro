@@ -12,7 +12,7 @@ import CTA from '../../components/CTA.astro';
 const title = "Joga - Transforma Tu Mente y Cuerpo con Yoga con IA";
 const description = "Experimenta el futuro del bienestar con programas de yoga personalizados con IA. Únete a miles que encuentran equilibrio, fuerza y paz interior.";
 const image = "/og-image.jpg";
-const url = "https://joga.com/es/";
+const url = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <Layout title={title} description={description} image={image} url={url}>
